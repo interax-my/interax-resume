@@ -1,9 +1,9 @@
-import { Button } from '@/components/ui/button'
+import { UploadResume } from '@/components/upload-resume'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Button>Hello world!</Button>
+    <main className="flex flex-col items-center justify-between py-10 px-10 md:px-24 lg:px-40 container">
+      <UploadResume />
     </main>
   )
 }
