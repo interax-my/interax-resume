@@ -18,6 +18,10 @@ export function UploadResume() {
             setResume(event.target.files[0]);
         }    
     };
+
+    const onProcess = () => {
+        setProcessing(true);
+    };
     
     return (
         <Card className="w-full">
@@ -34,7 +38,7 @@ export function UploadResume() {
                     </div>
                     <div className="col-span-12 md:col-span-4">
                         { isProcessing ? (
-                            <Button disabled className="w-full p-5">
+                            <Button disabled variant={ 'secondary' } className="w-full p-5">
                                 Processing
                             </Button>
                         ) : (
@@ -47,7 +51,7 @@ export function UploadResume() {
                         )} 
                     </div>
                 </div>
-                <ProcessResume />
+                <ProcessResume hasResume={ resume !== null } isProcessing = { isProcessing } onProcess = { onProcess } />
             </CardContent>
         </Card>
     )
