@@ -1,4 +1,4 @@
-import { UploadResume } from '@/components/upload-resume'
+import { UploadResume } from '@/components/sections/upload-resume'
 
 export default function Home() {
   return (
