@@ -2,7 +2,7 @@ export const getAiBody = ( prompt: string ) => {
     return {
         prompt: prompt,
         model: 'command',
-        max_tokens: 300,
+        max_tokens: 2000,
         temperature: 0.3,
         stream: false,
         prompt_truncation: 'off',
@@ -13,10 +13,11 @@ export const getAiBody = ( prompt: string ) => {
 //todo: optimize prompt
 export const generateExtractPdfPrompt = (content: string) => {
     return `Given a resume in text format below, please extract the following information and provide the results in a JSON object:
+
     ###resume content###
     ${content}
     ###end resume content###
-
+    
     1. Personal Information:
        - Name
        - Occupation
@@ -48,13 +49,13 @@ export const generateExtractPdfPrompt = (content: string) => {
           - Dates worked
           - Title
           - List of accomplishments or results
-
+    
     6. Certifications:
-       - List of certification
+       - List of certifications
     
     Ensure that all fields are filled, and if no related information is found, leave it as "null".
     
-    ##Output Example##
+    ## Output Example ##
     {
       "personalInfo": {
         "name": "John Doe",
@@ -109,10 +110,10 @@ export const generateExtractPdfPrompt = (content: string) => {
           ]
         }
       ],
-      "certification": [
+      "certifications": [
         {
           "name": "CSU Student Life and Housing",
-          "expiry": "2023-04-31",
+          "expiry": "2023-04-31"
         }
       ]
     }`;

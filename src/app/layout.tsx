@@ -3,6 +3,7 @@ import { Roboto_Mono } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/themes-provider'
 import MainNav from '@/components/main-nav'
+import { Toaster } from '@/components/ui/toaster'
 
 export const roboto_mono = Roboto_Mono({
   subsets: ['latin'],
@@ -31,6 +32,7 @@ export default function RootLayout({
           <MainNav></MainNav>
           {children}
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   )
