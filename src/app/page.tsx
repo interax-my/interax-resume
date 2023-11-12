@@ -16,9 +16,13 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center justify-between py-10 px-10 md:px-24 lg:px-40 container gap-y-8">
-      <UploadResume resume={ resumeFile } onSelect={ onResumeSelected } />
-      <section className='flex flex-col items-center justify-between w-full gap-y-2'>
+      <section className='w-full'>
+        <UploadResume resume={ resumeFile } onSelect={ onResumeSelected } />
+      </section>
+      <section className='w-full'>
         <ResumeInfo resume={ resumeInfo } />
+      </section>
+      <section className='w-full'>
         <Improvements />
       </section>
     </main>
