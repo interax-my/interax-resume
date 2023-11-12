@@ -7,31 +7,39 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { ProcessResume } from "./process-resume";
 import SectionContainer from "@/components/section-container";
+import axios from "axios";
+import { fileToBase64 } from "@/lib/base64";
 
-interface UploadResumeProps {
-    resume: File | null, 
-    onSelect: (file: File) => void;
-}
-
-export function UploadResume({ resume, onSelect }: UploadResumeProps) {
+export function UploadResume() {
+    const [resumeFile, setResumeFile] = useState<File | null>(null);
     const [isProcessing, setProcessing] = useState(false);
 
     const onFileSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files.length > 0) {
-            onSelect(event.target.files[0]);
+            setResumeFile(event.target.files[0]);
         }    
     };
 
-    const onProcess = () => {
+    const onProcess = async () => {
         setProcessing(true);
+        const base64String = await fileToBase64(resumeFile!);
+
+        axios.post('api/parse-resume', { file: base64String })
+        .then(response => {
+            console.log(response.data);
+        }).catch(error => {
+            console.error(error);
+        }).finally(() => {
+            setProcessing(false);
+        });
     };
     
     return (
-        <SectionContainer title={"Unlock Your Potential"} description={ "Upload Your Resume for a Personalized Career Checkup" }>
+        <SectionContainer title={"Unlock Your Potential"} description={ "Upload Your Resume for a Personalized Career Checkup" } isOpen = { true }>
             <div className="grid grid-cols-12 gap-6">
                 <div className="col-span-12 md:col-span-8">
                     <div className="rounded-md border px-4 py-3 text-sm text-center">
-                        { resume ? `Resume: ${resume.name}` : 'You have not upload any file' }
+                        { resumeFile ? `Resume: ${resumeFile.name}` : 'You have not upload any file' }
                     </div>
                 </div>
                 <div className="col-span-12 md:col-span-4">
@@ -49,7 +57,7 @@ export function UploadResume({ resume, onSelect }: UploadResumeProps) {
                     )} 
                 </div>
             </div>
-            <ProcessResume hasResume={ resume !== null } isProcessing = { isProcessing } onProcess = { onProcess } />
+            <ProcessResume hasResume={ resumeFile !== null } isProcessing = { isProcessing } onProcess = { onProcess } />
         </SectionContainer>
     )
 }

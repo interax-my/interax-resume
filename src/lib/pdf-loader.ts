@@ -1,5 +1,5 @@
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
-import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+// import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 
 export async function getPdfData(path: string) {
   try {
