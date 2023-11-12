@@ -1,6 +1,7 @@
 import SectionContainer from "@/components/section-container"
+import { Resume } from "@/lib/models/resume"
 
-export default function ResumeInfo() {
+export default function ResumeInfo({ resume }: { resume: Resume | null } ) {
   return (
     <SectionContainer title={"Resume Info"}>
       <ul>

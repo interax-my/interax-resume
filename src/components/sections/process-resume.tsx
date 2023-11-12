@@ -6,6 +6,7 @@ interface ProcessResumeProps {
     isProcessing: boolean,
     onProcess: () => void;
 }
+
 export function ProcessResume({hasResume, isProcessing, onProcess}: ProcessResumeProps ) {
     return (
         <div className="grid gap-2">
