@@ -16,7 +16,11 @@ export async function POST(request: Request)
 
         const result = await getPdfData(filePath);
 
-        return NextResponse.json({ data: filePath });
+        if (result.length == 0) {
+            return NextResponse.json({ message: 'Unable to read pdf' }, { status: 500 });
+        }
+
+        return NextResponse.json({ data: result[0].pageContent });
     } catch (e: any) {
         return NextResponse.json({ message: e.message }, { status: 500 });
     }

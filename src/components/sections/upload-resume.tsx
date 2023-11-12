@@ -9,6 +9,9 @@ import { ProcessResume } from "./process-resume";
 import SectionContainer from "@/components/section-container";
 import axios from "axios";
 import { fileToBase64 } from "@/lib/base64";
+import { Loader2 } from "lucide-react";
+import { toast } from "@/components/ui/use-toast";
+import { getAiBody } from "@/lib/prompt";
 
 export function UploadResume() {
     const [resumeFile, setResumeFile] = useState<File | null>(null);
@@ -24,15 +27,40 @@ export function UploadResume() {
         setProcessing(true);
         const base64String = await fileToBase64(resumeFile!);
 
-        axios.post('api/parse-resume', { file: base64String })
+        await axios.post('api/parse-resume', { file: base64String })
         .then(response => {
-            console.log(response.data);
+            extractData(response.data.data);
         }).catch(error => {
-            console.error(error);
-        }).finally(() => {
+            toast({
+                variant: "destructive",
+                title: "Uh oh! Something went wrong.",
+                description: error.response.data.message,
+            });
             setProcessing(false);
         });
     };
+
+    const extractData = async (content: string) => {
+        const body = getAiBody(content);
+
+        axios.post('https://api.cohere.ai/v1/generate', body, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${process.env.NEXT_PUBLIC_COHERE_API_KEY}`
+            },
+        })
+        .then(response => {
+            console.log(response.data);
+        }).catch(error => {
+            toast({
+                variant: "destructive",
+                title: "Uh oh! Something went wrong.",
+                description: error.response.data.message,
+            });
+        }).finally(() => {
+            setProcessing(false);
+        });
+    }
     
     return (
         <SectionContainer title={"Unlock Your Potential"} description={ "Upload Your Resume for a Personalized Career Checkup" } isOpen = { true }>
@@ -45,6 +73,7 @@ export function UploadResume() {
                 <div className="col-span-12 md:col-span-4">
                     { isProcessing ? (
                         <Button disabled variant={ 'secondary' } className="w-full p-5">
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                             Processing
                         </Button>
                     ) : (
