@@ -16,7 +16,7 @@ interface SectionContainerProp {
 export default function SectionContainer( { title, description = null, isOpen = false, children }: SectionContainerProp ) {
   return (
     <Card className="w-full">
-        <Accordion type="single" collapsible  defaultValue="item-1">
+        <Accordion type="single" collapsible defaultValue={ isOpen ? 'item-1' : '' }>
         <AccordionItem value="item-1" className="border-0">
           <CardHeader>
             <AccordionTrigger className="text-start">
