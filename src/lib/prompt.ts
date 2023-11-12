@@ -10,7 +10,6 @@ export const getAiBody = ( prompt: string ) => {
     };
 }
 
-//todo: optimize prompt
 export const generateExtractPdfPrompt = (content: string) => {
     return `Given a resume in text format below, please extract the following information and provide the results in a JSON object:
 
