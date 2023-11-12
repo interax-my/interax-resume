@@ -1,4 +1,4 @@
-export type resumeInfo = {
+export type Resume = {
     name: string,
     email: string,
     phoneNumber: string,

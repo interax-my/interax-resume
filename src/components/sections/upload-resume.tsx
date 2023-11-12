@@ -9,13 +9,17 @@ import { useState } from "react";
 import { ProcessResume } from "./process-resume";
 import { Separator } from "../ui/seperator";
 
-export function UploadResume() {
+interface UploadResumeProps {
+    resume: File | null, 
+    onSelect: (file: File) => void;
+}
+
+export function UploadResume({ resume, onSelect }: UploadResumeProps) {
     const [isProcessing, setProcessing] = useState(false);
-    const [resume, setResume] = useState<File | null>(null);
 
     const onFileSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files.length > 0) {
-            setResume(event.target.files[0]);
+            onSelect(event.target.files[0]);
         }    
     };
 
