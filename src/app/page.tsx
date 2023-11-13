@@ -20,7 +20,7 @@ export default function Home() {
         <UploadResume onResumeInfoExtracted={ onResumeInfoExtracted } />
       </section>
       <section className='w-full'>
-        <ResumeInfo resume={ resumeInfo } />
+        <ResumeInfo resume={ resumeInfo } setResume={ onResumeInfoExtracted } />
       </section>
       <section className='w-full'>
         <Improvements />
