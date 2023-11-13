@@ -11,7 +11,8 @@ export async function POST(request: Request)
         const data = await request.json();
         const fileBuffer = Buffer.from(data.file, 'base64');
         const fileName = v4() + '.pdf';
-        const filePath = path.join(process.cwd(), 'tmp', fileName);
+        const filePath = process.env.NODE_ENV === 'production' ? `/tmp/${fileName}` : path.join(process.cwd(), 'uploads', fileName);
+        
         await fs.promises.writeFile(filePath, fileBuffer);
 
         const result = await getPdfData(filePath);
