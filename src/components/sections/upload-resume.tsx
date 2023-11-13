@@ -48,7 +48,7 @@ export function UploadResume({ onResumeInfoExtracted }: { onResumeInfoExtracted:
     const extractData = async (content: string) => {
         axios.post('api/parse-resume/extract', { content: content })
         .then(response => {
-            tryParseJson(response.data);
+            tryParseJson(response.data.data);
         }).catch(error => {
             toast({
                 variant: "destructive",
@@ -71,7 +71,7 @@ export function UploadResume({ onResumeInfoExtracted }: { onResumeInfoExtracted:
             toast({
                 variant: "destructive",
                 title: "Uh oh! Something went wrong.",
-                description: 'Unable to extract resume data.',
+                description: 'Unable to parse resume data.',
             });
         }
     }
