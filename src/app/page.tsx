@@ -12,7 +12,6 @@ export default function Home() {
   //todo: auto open resumeInfo accordion once resumeinfo is set
   const onResumeInfoExtracted = (info: Resume) => {
     setResumeInfo(info); 
-    console.log(info.personalInfo);
   };
 
   return (
