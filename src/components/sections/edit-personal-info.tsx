@@ -15,7 +15,7 @@ import { Resume } from "@/lib/models/resume"
 import { EditIcon } from "lucide-react"
 import { useState } from "react"
 
-export function EditInfo({ resume, setResume }: { resume: Resume, setResume: (info: Resume) => void }) {
+export function EditPersonalInfo({ resume, setResume }: { resume: Resume, setResume: (info: Resume) => void }) {
     const [open, setOpen] = useState(false);
     const [name, setName] = useState(resume.personalInfo?.name ?? '');
     const [occupation, setOccupation] = useState(resume.personalInfo?.occupation ?? '');
@@ -40,11 +40,10 @@ export function EditInfo({ resume, setResume }: { resume: Resume, setResume: (in
         setOpen(false);
     };
 
-    //todo: fill in all info
     return (
     <Dialog open={open} onOpenChange={setOpen} >
         <DialogTrigger asChild>
-            <Button variant='secondary' className="w-full sm:w-auto">
+            <Button variant='link'>
                 <EditIcon className="mr-2 h-4 w-4" />
                 Edit
             </Button>

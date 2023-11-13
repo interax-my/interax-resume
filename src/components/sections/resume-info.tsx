@@ -1,6 +1,6 @@
 import SectionContainer from "@/components/section-container"
 import { Resume } from "@/lib/models/resume"
-import { EditInfo } from "./edit-info";
+import { EditPersonalInfo } from "./edit-personal-info";
 
 export default function ResumeInfo({ resume, setResume }: { resume: Resume | null, setResume: (info: Resume) => void }) {
   const getEducation = () => resume && resume.education ? resume.education.map((e, index) => (
@@ -101,14 +101,14 @@ export default function ResumeInfo({ resume, setResume }: { resume: Resume | nul
 
   return (
     <SectionContainer title={ "Resume Info" } description={ "Double-check the Details to Make Sure Everything is Accurate" } isOpen={ resume !== null }>
-      { resume && (
-        <div className="flex justify-end">
-          <EditInfo resume={ resume } setResume={ setResume } />
-        </div>
-      )}
       <ul>
         <li>
-          <h4 className="text-sm font-medium">Personal Info</h4>
+          <div className="grid grid-cols-4 gap-4 items-center">
+            <h4 className="text-sm font-medium col-span-3">Personal Info</h4>
+            { resume && (
+              <EditPersonalInfo resume={ resume } setResume={ setResume } />
+            )}
+          </div>
         </li>
         <li>
           <span className="font-semibold text-primary">Name</span>: { resume?.personalInfo?.name ?? 'N/A' }
