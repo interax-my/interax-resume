@@ -1,3 +1,4 @@
+//todo: optimize token count
 export const getAiBody = ( prompt: string ) => {
     return {
         prompt: prompt,
