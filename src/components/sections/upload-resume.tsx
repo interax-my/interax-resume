@@ -11,8 +11,6 @@ import axios from "axios";
 import { fileToBase64 } from "@/lib/base64";
 import { Loader2 } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
-import { generateExtractPdfPrompt, getAiBody } from "@/lib/prompt";
-import { Stream } from "stream";
 import { Resume } from "@/lib/models/resume";
 
 export function UploadResume({ onResumeInfoExtracted }: { onResumeInfoExtracted: (info: Resume) => void }) {
@@ -48,24 +46,9 @@ export function UploadResume({ onResumeInfoExtracted }: { onResumeInfoExtracted:
     };
 
     const extractData = async (content: string) => {
-        const body = getAiBody(generateExtractPdfPrompt(content));
-
-        axios.post('https://api.cohere.ai/v1/generate', body, {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${process.env.NEXT_PUBLIC_COHERE_API_KEY}`
-            },
-        })
+        axios.post('api/parse-resume/extract', { content: content })
         .then(response => {
-            if (response.data.generations.length === 0) {
-                toast({
-                    variant: "destructive",
-                    title: "Uh oh! Something went wrong.",
-                    description: 'Unable to extract resume data.',
-                });
-            } else {
-                tryParseJson(response.data.generations[0].text);
-            }
+            tryParseJson(response.data);
         }).catch(error => {
             toast({
                 variant: "destructive",
@@ -74,7 +57,7 @@ export function UploadResume({ onResumeInfoExtracted }: { onResumeInfoExtracted:
             });
         }).finally(() => {
             setProcessing(false);
-        });   
+        });
     }
 
     const tryParseJson = (str: string) => {
