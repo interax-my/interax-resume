@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { v4 } from "uuid";
 import fs from 'fs';
 import { generateExtractPdfPrompt, getAiBody } from "@/lib/prompt";
+import path from "path";
 
 export async function POST(request: Request) 
 {  
@@ -10,8 +11,7 @@ export async function POST(request: Request)
         const data = await request.json();
         const fileBuffer = Buffer.from(data.file, 'base64');
         const fileName = v4() + '.pdf';
-        const filePath = `/tmp${fileName}`;
-
+        const filePath = path.join(process.cwd(), 'tmp', fileName);
         await fs.promises.writeFile(filePath, fileBuffer);
 
         const result = await getPdfData(filePath);
