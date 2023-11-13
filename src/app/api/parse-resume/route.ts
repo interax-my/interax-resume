@@ -5,6 +5,8 @@ import fs from 'fs';
 import { generateExtractPdfPrompt, getAiBody } from "@/lib/prompt";
 import path from "path";
 
+export const maxDuration = 100;
+
 export async function POST(request: Request) 
 {  
     try {
