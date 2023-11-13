@@ -12,6 +12,7 @@ export default function Home() {
   //todo: auto open resumeInfo accordion once resumeinfo is set
   const onResumeInfoExtracted = (info: Resume) => {
     setResumeInfo(info); 
+    console.log(info.personalInfo);
   };
 
   return (
@@ -20,7 +21,7 @@ export default function Home() {
         <UploadResume onResumeInfoExtracted={ onResumeInfoExtracted } />
       </section>
       <section className='w-full'>
-        <ResumeInfo resume={ resumeInfo } />
+        <ResumeInfo resume={ resumeInfo } setResume={ onResumeInfoExtracted } />
       </section>
       <section className='w-full'>
         <Improvements />
