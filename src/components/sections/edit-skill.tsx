@@ -61,33 +61,33 @@ export function EditSkill({ resume, setResume }: { resume: Resume, setResume: (i
             </DialogHeader>
             <ScrollArea className="h-full px-3">
                 <div className="grid gap-5 py-4">
-                <div className="grid grid-cols-5 gap-4 items-center">
-                    <h4 className="text-sm font-medium text-primary col-span-4">Skills</h4>
-                    <div className="col-span-1 flex justify-end">
-                        <Button variant="outline" size="icon" onClick={ add }>
-                            <PlusIcon className="h-4 w-4" />
-                        </Button>
-                    </div>
-                </div>
-                { skill.map((e, index) => (
-                    <div key={ `edit-${index}` } className="grid grid-cols-5 gap-4 items-center mb-2">
-                        <Input
-                        value={ e ?? '' }
-                        onChange={(e) => {
-                            const edited = [...skill];
-                            edited[index] = e.target.value;
-                            setSkill(edited);
-                        }}
-                        className="col-span-4"
-                        />
+                    <div className="grid grid-cols-5 gap-4 items-center">
+                        <h4 className="text-sm font-medium text-primary col-span-4">Skills</h4>
                         <div className="col-span-1 flex justify-end">
-                            <Button variant="outline" size="icon" onClick={() => remove(index)}>
-                                <MinusIcon className="h-4 w-4" />
+                            <Button variant="outline" size="icon" onClick={ add }>
+                                <PlusIcon className="h-4 w-4" />
                             </Button>
                         </div>
                     </div>
-                ) )}
-            </div>
+                    { skill.map((e, index) => (
+                        <div key={ `edit-${index}` } className="grid grid-cols-5 gap-4 items-center mb-2">
+                            <Input
+                            value={ e ?? '' }
+                            onChange={(e) => {
+                                const edited = [...skill];
+                                edited[index] = e.target.value;
+                                setSkill(edited);
+                            }}
+                            className="col-span-4"
+                            />
+                            <div className="col-span-1 flex justify-end">
+                                <Button variant="outline" size="icon" onClick={() => remove(index)}>
+                                    <MinusIcon className="h-4 w-4" />
+                                </Button>
+                            </div>
+                        </div>
+                    ) )}
+                </div>
             </ScrollArea>
             <DialogFooter>
                 <Button type="submit" onClick={ onSubmit }>Save changes</Button>
