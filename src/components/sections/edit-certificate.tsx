@@ -48,7 +48,7 @@ export function EditCertificate({ resume, setResume }: { resume: Resume, setResu
                 Edit
             </Button>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="h-4/5">
             <DialogHeader>
                 <DialogTitle>Edit Info</DialogTitle>
             </DialogHeader>

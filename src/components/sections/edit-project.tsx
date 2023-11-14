@@ -48,7 +48,7 @@ export function EditProject({ resume, setResume }: { resume: Resume, setResume: 
                 Edit
             </Button>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="h-4/5">
             <DialogHeader>
                 <DialogTitle>Edit Info</DialogTitle>
             </DialogHeader>

@@ -8,7 +8,7 @@ import { EditCertificate } from "./edit-certificate";
 import { EditSkill } from "./edit-skill";
 
 export default function ResumeInfo({ resume, setResume }: { resume: Resume | null, setResume: (info: Resume) => void }) {
-  const getEducation = () => resume && resume.education ? resume.education.map((e, index) => (
+  const getEducation = () => resume && resume.education && resume.education.length !== 0 ? resume.education.map((e, index) => (
     <div key={ `edu-${index}` } className="mb-2">
       <li>
         <span className="font-semibold text-primary">{ e.degree ?? 'N/A'}</span>
@@ -32,7 +32,7 @@ export default function ResumeInfo({ resume, setResume }: { resume: Resume | nul
     </li>
   );
 
-  const getCourseworkProject = () => resume && resume.relatedCourseworkProjects ? resume.relatedCourseworkProjects.map((e, index) => (
+  const getCourseworkProject = () => resume && resume.relatedCourseworkProjects && resume.relatedCourseworkProjects.length !== 0 ? resume.relatedCourseworkProjects.map((e, index) => (
     <div key={ `proj-${index}` } className="mb-2">
       <li>
         <span className="font-semibold text-primary">{ e.name ?? 'N/A'}</span>
@@ -50,7 +50,7 @@ export default function ResumeInfo({ resume, setResume }: { resume: Resume | nul
     </li>
   );
 
-  const getExperience = () => resume && resume.experience ? resume.experience.map((e, index) => (
+  const getExperience = () => resume && resume.experience && resume.experience.length !== 0 ? resume.experience.map((e, index) => (
     <div key={ `ex-${index}` } className="mb-2">
       <li>
         <span className="font-semibold text-primary">{ e.title ?? 'N/A'}</span>
@@ -79,7 +79,7 @@ export default function ResumeInfo({ resume, setResume }: { resume: Resume | nul
     </li>
   );
 
-  const getCertificate = () => resume && resume.certifications ? resume.certifications.map((e, index) => (
+  const getCertificate = () => resume && resume.certifications && resume.certifications.length !== 0 ? resume.certifications.map((e, index) => (
     <div key={ `cert-${index}` } className="mb-2">
       <li>
         <span className="font-semibold text-primary">{ e.name ?? 'N/A'}</span>
@@ -94,7 +94,7 @@ export default function ResumeInfo({ resume, setResume }: { resume: Resume | nul
     </li>
   );
 
-  const getSkill = () => resume && resume.skills ? resume.skills.map((e, index) => (
+  const getSkill = () => resume && resume.skills && resume.skills.length !== 0 ? resume.skills.map((e, index) => (
     <li key={ `skill-${index}` } className="ml-5 list-disc">
       <span className="font-semibold text-primary">{ e }</span>
     </li>

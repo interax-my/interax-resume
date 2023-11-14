@@ -15,6 +15,7 @@ import { Resume } from "@/lib/models/resume"
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons"
 import { EditIcon } from "lucide-react"
 import { useState } from "react"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 export function EditEducation({ resume, setResume }: { resume: Resume, setResume: (info: Resume) => void }) {
     const [open, setOpen] = useState(false);
@@ -65,11 +66,12 @@ export function EditEducation({ resume, setResume }: { resume: Resume, setResume
                 Edit
             </Button>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="h-4/5">
             <DialogHeader>
                 <DialogTitle>Edit Info</DialogTitle>
             </DialogHeader>
-            <div className="grid gap-5 py-4">
+            <ScrollArea className="h-full">
+                <div className="grid gap-5 py-4">
                 <div className="grid grid-cols-5 gap-4 items-center">
                     <h4 className="text-sm font-medium text-primary col-span-4">Education</h4>
                     <div className="col-span-1 flex justify-end">
@@ -116,9 +118,56 @@ export function EditEducation({ resume, setResume }: { resume: Resume, setResume
                             className="col-span-3"
                             />
                         </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                            <Label htmlFor="location" className="text-right">
+                            Location
+                            </Label>
+                            <Input
+                            id="location"
+                            value={ e.location ?? '' }
+                            onChange={(e) => {
+                                const edited = [...education];
+                                edited[index].location = e.target.value;
+                                setEducation(edited);
+                            }}
+                            className="col-span-3"
+                            />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                            <Label htmlFor="date" className="text-right">
+                            Grad Date
+                            </Label>
+                            <Input
+                            id="date"
+                            value={ e.graduationDate ?? '' }
+                            onChange={(e) => {
+                                const edited = [...education];
+                                edited[index].graduationDate = e.target.value;
+                                setEducation(edited);
+                            }}
+                            className="col-span-3"
+                            />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                            <Label htmlFor="pointer" className="text-right">
+                            CGPA
+                            </Label>
+                            <Input
+                            id="pointer"
+                            value={ e.gpa ?? '' }
+                            type="number"
+                            onChange={(e) => {
+                                const edited = [...education];
+                                edited[index].gpa = e.target.value ? Number(e.target.value) : null;
+                                setEducation(edited);
+                            }}
+                            className="col-span-3"
+                            />
+                        </div>
                     </div>
                 ) )}
             </div>
+            </ScrollArea>
             <DialogFooter>
                 <Button type="submit" onClick={ onSubmit }>Save changes</Button>
             </DialogFooter>

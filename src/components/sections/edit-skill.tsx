@@ -48,7 +48,7 @@ export function EditSkill({ resume, setResume }: { resume: Resume, setResume: (i
                 Edit
             </Button>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="h-4/5">
             <DialogHeader>
                 <DialogTitle>Edit Info</DialogTitle>
             </DialogHeader>

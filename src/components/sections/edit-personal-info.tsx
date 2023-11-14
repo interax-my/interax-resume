@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label"
 import { Resume } from "@/lib/models/resume"
 import { EditIcon } from "lucide-react"
 import { useState } from "react"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 export function EditPersonalInfo({ resume, setResume }: { resume: Resume, setResume: (info: Resume) => void }) {
     const [open, setOpen] = useState(false);
@@ -48,70 +49,72 @@ export function EditPersonalInfo({ resume, setResume }: { resume: Resume, setRes
                 Edit
             </Button>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="h-4/5">
             <DialogHeader>
                 <DialogTitle>Edit Info</DialogTitle>
             </DialogHeader>
-            <div className="grid gap-4 py-4">
-                <h4 className="text-sm font-medium text-primary">Personal Info</h4>
-                <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="name" className="text-right">
-                    Name
-                    </Label>
-                    <Input
-                    id="name"
-                    value={ name }
-                    onChange={(e) => setName(e.target.value)}
-                    className="col-span-3"
-                    />
+            <ScrollArea className="h-full">
+                <div className="grid gap-4 py-4">
+                    <h4 className="text-sm font-medium text-primary">Personal Info</h4>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="name" className="text-right">
+                        Name
+                        </Label>
+                        <Input
+                        id="name"
+                        value={ name }
+                        onChange={(e) => setName(e.target.value)}
+                        className="col-span-3"
+                        />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="occupation" className="text-right">
+                        Occupation
+                        </Label>
+                        <Input
+                        id="occupation"
+                        value={ occupation }
+                        onChange={(e) => setOccupation(e.target.value)}
+                        className="col-span-3"
+                        />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="experience" className="text-right">
+                        Experience
+                        </Label>
+                        <Input
+                        id="experience"
+                        value={ experience }
+                        onChange={(e) => setExperience(e.target.value)}
+                        type="number"
+                        className="col-span-3"
+                        />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="email" className="text-right">
+                        Email
+                        </Label>
+                        <Input
+                        id="email"
+                        value={ email }
+                        onChange={(e) => setEmail(e.target.value)}
+                        type="email"
+                        className="col-span-3"
+                        />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="location" className="text-right">
+                        Location
+                        </Label>
+                        <Input
+                        id="location"
+                        value={ location }
+                        onChange={(e) => setLocation(e.target.value)}
+                        className="col-span-3"
+                        />
+                    </div>
                 </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="occupation" className="text-right">
-                    Occupation
-                    </Label>
-                    <Input
-                    id="occupation"
-                    value={ occupation }
-                    onChange={(e) => setOccupation(e.target.value)}
-                    className="col-span-3"
-                    />
-                </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="experience" className="text-right">
-                    Experience
-                    </Label>
-                    <Input
-                    id="experience"
-                    value={ experience }
-                    onChange={(e) => setExperience(e.target.value)}
-                    type="number"
-                    className="col-span-3"
-                    />
-                </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="email" className="text-right">
-                    Email
-                    </Label>
-                    <Input
-                    id="email"
-                    value={ email }
-                    onChange={(e) => setEmail(e.target.value)}
-                    type="email"
-                    className="col-span-3"
-                    />
-                </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="location" className="text-right">
-                    Location
-                    </Label>
-                    <Input
-                    id="location"
-                    value={ location }
-                    onChange={(e) => setLocation(e.target.value)}
-                    className="col-span-3"
-                    />
-                </div>
-            </div>
+            </ScrollArea>
             <DialogFooter>
                 <Button type="submit" onClick={ onSubmit }>Save changes</Button>
             </DialogFooter>
