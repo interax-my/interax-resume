@@ -16,22 +16,20 @@ import { MinusIcon, PlusIcon } from "@radix-ui/react-icons"
 import { EditIcon } from "lucide-react"
 import { useState } from "react"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { Separator } from "@/components/ui/seperator"
 
 export function EditCertificate({ resume, setResume }: { resume: Resume, setResume: (info: Resume) => void }) {
     const [open, setOpen] = useState(false);
-    const [education, setEducation] = useState<{
-        college: string | null;
-        location: string | null;
-        graduationDate: string | null;
-        degree: string | null;
-        gpa: number | null;
-    }[]>(resume.education ?? []);
+    const [cert, setCert] = useState<{
+        name: string | null;
+        expiry: string | null;
+    }[]>(resume.certifications ?? []);
 
     const onSubmit = (event: { preventDefault: () => void }) => {
         event.preventDefault();
         const editedResume: Resume = {
             ...resume,
-            education: education,
+            certifications: cert,
         };
 
         setResume(editedResume);    
@@ -41,21 +39,18 @@ export function EditCertificate({ resume, setResume }: { resume: Resume, setResu
 
     const add = () => {
         const item = [
-            ...education,
+            ...cert,
             {
-                college: null,
-                location: null,
-                graduationDate: null,
-                degree: null,
-                gpa: null,
+                name: null,
+                expiry: null,
             },
         ];
-        setEducation(item);
+        setCert(item);
      };
      
     const remove = (index: number) => {
-        const item = education.filter((_, i) => i !== index);
-        setEducation(item);
+        const item = cert.filter((_, i) => i !== index);
+        setCert(item);
     };
      
     return (
@@ -73,97 +68,56 @@ export function EditCertificate({ resume, setResume }: { resume: Resume, setResu
             <ScrollArea className="h-full px-3">
                 <div className="grid gap-5 py-4">
                 <div className="grid grid-cols-5 gap-4 items-center">
-                    <h4 className="text-sm font-medium text-primary col-span-4">Education</h4>
+                    <h4 className="text-sm font-medium text-primary col-span-4">Certifications</h4>
                     <div className="col-span-1 flex justify-end">
                         <Button variant="outline" size="icon" onClick={ add }>
                             <PlusIcon className="h-4 w-4" />
                         </Button>
                     </div>
                 </div>
-                { education.map((e, index) => (
+                { cert.map((e, index) => (
                     <div key={ `edit-${index}` } className="grid gap-4">
                         <div>
                             <div className="grid grid-cols-5 gap-4 items-center mb-2">
-                                <Label htmlFor="name" className="col-span-4">
-                                Course/Major
-                                </Label>
+                                <div className="col-span-4"></div>
                                 <div className="col-span-1 flex justify-end">
                                     <Button variant="outline" size="icon" onClick={() => remove(index)}>
                                         <MinusIcon className="h-4 w-4" />
                                     </Button>
                                 </div>
                             </div>
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                            <Label htmlFor="name" className="text-right">
+                            Name
+                            </Label>
                             <Input
                             id="name"
-                            value={ e.degree ?? '' }
+                            value={ e.name ?? '' }
                             onChange={(e) => {
-                                const edited = [...education];
-                                edited[index].degree = e.target.value;
-                                setEducation(edited);
-                            }}
-                            />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="college" className="text-right">
-                            College
-                            </Label>
-                            <Input
-                            id="college"
-                            value={ e.college ?? '' }
-                            onChange={(e) => {
-                                const edited = [...education];
-                                edited[index].college = e.target.value;
-                                setEducation(edited);
+                                const edited = [...cert];
+                                edited[index].name = e.target.value;
+                                setCert(edited);
                             }}
                             className="col-span-3"
                             />
                         </div>
                         <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="location" className="text-right">
-                            Location
+                            <Label htmlFor="year" className="text-right">
+                            Expiry
                             </Label>
                             <Input
-                            id="location"
-                            value={ e.location ?? '' }
+                            id="year"
+                            value={ e.expiry ?? '' }
                             onChange={(e) => {
-                                const edited = [...education];
-                                edited[index].location = e.target.value;
-                                setEducation(edited);
+                                const edited = [...cert];
+                                edited[index].expiry = e.target.value;
+                                setCert(edited);
                             }}
                             className="col-span-3"
                             />
                         </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="date" className="text-right">
-                            Grad Date
-                            </Label>
-                            <Input
-                            id="date"
-                            value={ e.graduationDate ?? '' }
-                            onChange={(e) => {
-                                const edited = [...education];
-                                edited[index].graduationDate = e.target.value;
-                                setEducation(edited);
-                            }}
-                            className="col-span-3"
-                            />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="pointer" className="text-right">
-                            CGPA
-                            </Label>
-                            <Input
-                            id="pointer"
-                            value={ e.gpa ?? '' }
-                            type="number"
-                            onChange={(e) => {
-                                const edited = [...education];
-                                edited[index].gpa = e.target.value ? Number(e.target.value) : null;
-                                setEducation(edited);
-                            }}
-                            className="col-span-3"
-                            />
-                        </div>
+                        <Separator className="mt-4 mb-6" />
                     </div>
                 ) )}
             </div>
