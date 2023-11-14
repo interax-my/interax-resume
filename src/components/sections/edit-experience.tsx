@@ -184,7 +184,7 @@ export function EditExperience({ resume, setResume }: { resume: Resume, setResum
                                     className="col-span-4"
                                     />
                                     <div className="col-span-1 flex justify-end">
-                                        <Button variant="outline" size="icon" onClick={() => removeAccomplishment(index, i)}>
+                                        <Button variant="secondary" size="icon" onClick={() => removeAccomplishment(index, i)}>
                                             <MinusIcon className="h-4 w-4" />
                                         </Button>
                                     </div>
