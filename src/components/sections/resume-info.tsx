@@ -1,6 +1,11 @@
 import SectionContainer from "@/components/section-container"
 import { Resume } from "@/lib/models/resume"
 import { EditPersonalInfo } from "./edit-personal-info";
+import { EditEducation } from "./edit-education";
+import { EditProject } from "./edit-project";
+import { EditExperience } from "./edit-experience";
+import { EditCertificate } from "./edit-certificate";
+import { EditSkill } from "./edit-skill";
 
 export default function ResumeInfo({ resume, setResume }: { resume: Resume | null, setResume: (info: Resume) => void }) {
   const getEducation = () => resume && resume.education ? resume.education.map((e, index) => (
@@ -125,24 +130,49 @@ export default function ResumeInfo({ resume, setResume }: { resume: Resume | nul
         <li>
           <span className="font-semibold text-primary">Location</span>: { resume?.personalInfo?.location ?? 'N/A' }
         </li>
-        <li className="mt-4">
-          <h4 className="text-sm font-medium">Education</h4>
+        <li>
+          <div className="grid grid-cols-4 gap-4 items-center mt-4">
+            <h4 className="text-sm font-medium col-span-3">Education</h4>
+            { resume && (
+              <EditEducation resume={ resume } setResume={ setResume } />
+            )}
+          </div>
         </li>
         { getEducation() }
-        <li className="mt-4">
-          <h4 className="text-sm font-medium">Coursework Projects</h4>
+        <li>
+          <div className="grid grid-cols-4 gap-4 items-center mt-4">
+            <h4 className="text-sm font-medium col-span-3">Coursework Projects</h4>
+            { resume && (
+              <EditProject resume={ resume } setResume={ setResume } />
+            )}
+          </div>
         </li>
         { getCourseworkProject() }
-        <li className="mt-4">
-          <h4 className="text-sm font-medium">Experience</h4>
+        <li>
+          <div className="grid grid-cols-4 gap-4 items-center mt-4">
+            <h4 className="text-sm font-medium col-span-3">Experience</h4>
+            { resume && (
+              <EditExperience resume={ resume } setResume={ setResume } />
+            )}
+          </div>
         </li>
         { getExperience() }
-        <li className="mt-4">
-          <h4 className="text-sm font-medium">Certifications</h4>
+        <li>
+          <div className="grid grid-cols-4 gap-4 items-center mt-4">
+            <h4 className="text-sm font-medium col-span-3">Certifications</h4>
+            { resume && (
+              <EditCertificate resume={ resume } setResume={ setResume } />
+            )}
+          </div>
         </li>
         { getCertificate() }
-        <li className="mt-4">
-          <h4 className="text-sm font-medium">Skills</h4>
+        <li>
+          <div className="grid grid-cols-4 gap-4 items-center mt-4">
+            <h4 className="text-sm font-medium col-span-3">Skills</h4>
+            { resume && (
+              <EditSkill resume={ resume } setResume={ setResume } />
+            )}
+          </div>
         </li>
         { getSkill() }
       </ul>
