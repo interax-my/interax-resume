@@ -57,7 +57,7 @@ export function EditPersonalInfo({ resume, setResume }: { resume: Resume, setRes
                 <div className="grid gap-4 py-4">
                     <h4 className="text-sm font-medium text-primary">Personal Info</h4>
                     <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="name" className="text-right">
+                        <Label htmlFor="name" className="text-left">
                         Name
                         </Label>
                         <Input
@@ -68,7 +68,7 @@ export function EditPersonalInfo({ resume, setResume }: { resume: Resume, setRes
                         />
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="occupation" className="text-right">
+                        <Label htmlFor="occupation" className="text-left">
                         Occupation
                         </Label>
                         <Input
@@ -79,7 +79,7 @@ export function EditPersonalInfo({ resume, setResume }: { resume: Resume, setRes
                         />
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="experience" className="text-right">
+                        <Label htmlFor="experience" className="text-left">
                         Experience
                         </Label>
                         <Input
@@ -91,7 +91,7 @@ export function EditPersonalInfo({ resume, setResume }: { resume: Resume, setRes
                         />
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="email" className="text-right">
+                        <Label htmlFor="email" className="text-left">
                         Email
                         </Label>
                         <Input
@@ -103,7 +103,7 @@ export function EditPersonalInfo({ resume, setResume }: { resume: Resume, setRes
                         />
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="location" className="text-right">
+                        <Label htmlFor="location" className="text-left">
                         Location
                         </Label>
                         <Input

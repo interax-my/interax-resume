@@ -88,7 +88,7 @@ export function EditCertificate({ resume, setResume }: { resume: Resume, setResu
                             </div>
                         </div>
                         <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="name" className="text-right">
+                            <Label htmlFor="name" className="text-left">
                             Name
                             </Label>
                             <Input
@@ -103,7 +103,7 @@ export function EditCertificate({ resume, setResume }: { resume: Resume, setResu
                             />
                         </div>
                         <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="year" className="text-right">
+                            <Label htmlFor="year" className="text-left">
                             Expiry
                             </Label>
                             <Input

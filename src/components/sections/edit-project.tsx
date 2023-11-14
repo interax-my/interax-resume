@@ -101,7 +101,7 @@ export function EditProject({ resume, setResume }: { resume: Resume, setResume: 
                             />
                         </div>
                         <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="year" className="text-right">
+                            <Label htmlFor="year" className="text-left">
                             Year
                             </Label>
                             <Input
@@ -117,7 +117,7 @@ export function EditProject({ resume, setResume }: { resume: Resume, setResume: 
                             />
                         </div>
                         <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="description" className="text-right">
+                            <Label htmlFor="description" className="text-left">
                             Description
                             </Label>
                             <Input

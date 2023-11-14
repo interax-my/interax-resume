@@ -105,7 +105,7 @@ export function EditEducation({ resume, setResume }: { resume: Resume, setResume
                             />
                         </div>
                         <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="college" className="text-right">
+                            <Label htmlFor="college" className="text-left">
                             College
                             </Label>
                             <Input
@@ -120,7 +120,7 @@ export function EditEducation({ resume, setResume }: { resume: Resume, setResume
                             />
                         </div>
                         <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="location" className="text-right">
+                            <Label htmlFor="location" className="text-left">
                             Location
                             </Label>
                             <Input
@@ -135,7 +135,7 @@ export function EditEducation({ resume, setResume }: { resume: Resume, setResume
                             />
                         </div>
                         <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="date" className="text-right">
+                            <Label htmlFor="date" className="text-left">
                             Grad Date
                             </Label>
                             <Input
@@ -150,7 +150,7 @@ export function EditEducation({ resume, setResume }: { resume: Resume, setResume
                             />
                         </div>
                         <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="pointer" className="text-right">
+                            <Label htmlFor="pointer" className="text-left">
                             CGPA
                             </Label>
                             <Input

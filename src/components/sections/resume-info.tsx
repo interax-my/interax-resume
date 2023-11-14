@@ -111,7 +111,9 @@ export default function ResumeInfo({ resume, setResume }: { resume: Resume | nul
           <div className="grid grid-cols-4 gap-4 items-center">
             <h4 className="text-sm font-medium col-span-3">Personal Info</h4>
             { resume && (
-              <EditPersonalInfo resume={ resume } setResume={ setResume } />
+              <div className="col-span-1 flex justify-end">
+                <EditPersonalInfo resume={ resume } setResume={ setResume } />
+              </div>
             )}
           </div>
         </li>
@@ -134,7 +136,9 @@ export default function ResumeInfo({ resume, setResume }: { resume: Resume | nul
           <div className="grid grid-cols-4 gap-4 items-center mt-4">
             <h4 className="text-sm font-medium col-span-3">Education</h4>
             { resume && (
-              <EditEducation resume={ resume } setResume={ setResume } />
+              <div className="col-span-1 flex justify-end">
+                <EditEducation resume={ resume } setResume={ setResume } />
+              </div>
             )}
           </div>
         </li>
@@ -143,7 +147,9 @@ export default function ResumeInfo({ resume, setResume }: { resume: Resume | nul
           <div className="grid grid-cols-4 gap-4 items-center mt-4">
             <h4 className="text-sm font-medium col-span-3">Coursework Projects</h4>
             { resume && (
-              <EditProject resume={ resume } setResume={ setResume } />
+              <div className="col-span-1 flex justify-end">
+                <EditProject resume={ resume } setResume={ setResume } />
+              </div>
             )}
           </div>
         </li>
@@ -152,7 +158,9 @@ export default function ResumeInfo({ resume, setResume }: { resume: Resume | nul
           <div className="grid grid-cols-4 gap-4 items-center mt-4">
             <h4 className="text-sm font-medium col-span-3">Experience</h4>
             { resume && (
-              <EditExperience resume={ resume } setResume={ setResume } />
+              <div className="col-span-1 flex justify-end">
+                <EditExperience resume={ resume } setResume={ setResume } />
+              </div>
             )}
           </div>
         </li>
@@ -161,7 +169,9 @@ export default function ResumeInfo({ resume, setResume }: { resume: Resume | nul
           <div className="grid grid-cols-4 gap-4 items-center mt-4">
             <h4 className="text-sm font-medium col-span-3">Certifications</h4>
             { resume && (
-              <EditCertificate resume={ resume } setResume={ setResume } />
+              <div className="col-span-1 flex justify-end">
+                <EditCertificate resume={ resume } setResume={ setResume } />
+              </div>
             )}
           </div>
         </li>
@@ -170,7 +180,9 @@ export default function ResumeInfo({ resume, setResume }: { resume: Resume | nul
           <div className="grid grid-cols-4 gap-4 items-center mt-4">
             <h4 className="text-sm font-medium col-span-3">Skills</h4>
             { resume && (
-              <EditSkill resume={ resume } setResume={ setResume } />
+              <div className="col-span-1 flex justify-end">
+                <EditSkill resume={ resume } setResume={ setResume } />
+              </div>
             )}
           </div>
         </li>
