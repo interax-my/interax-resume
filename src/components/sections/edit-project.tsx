@@ -110,7 +110,7 @@ export function EditProject({ resume, setResume }: { resume: Resume, setResume: 
                             type="number"
                             onChange={(e) => {
                                 const edited = [...project];
-                                edited[index].year = e.target.value ? Number(e.target.value) : null;
+                                edited[index].year = e.target.value && e.target.value !== '' ? Number(e.target.value) : null;
                                 setProject(edited);
                             }}
                             className="col-span-3"

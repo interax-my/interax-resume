@@ -31,7 +31,7 @@ export function EditPersonalInfo({ resume, setResume }: { resume: Resume, setRes
             personalInfo: {
                 name: name,
                 occupation: occupation,
-                experience: Number(experience),
+                experience: experience !== '' ? Number(experience) : null,
                 location: location,
                 email: email,
             }

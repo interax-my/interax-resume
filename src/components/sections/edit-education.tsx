@@ -159,7 +159,7 @@ export function EditEducation({ resume, setResume }: { resume: Resume, setResume
                             type="number"
                             onChange={(e) => {
                                 const edited = [...education];
-                                edited[index].gpa = e.target.value ? Number(e.target.value) : null;
+                                edited[index].gpa = e.target.value && e.target.value !== '' ? Number(e.target.value) : null;
                                 setEducation(edited);
                             }}
                             className="col-span-3"
