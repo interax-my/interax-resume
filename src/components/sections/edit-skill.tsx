@@ -10,13 +10,11 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Resume } from "@/lib/models/resume"
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons"
 import { EditIcon } from "lucide-react"
 import { useState } from "react"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Separator } from "@/components/ui/seperator"
 
 export function EditSkill({ resume, setResume }: { resume: Resume, setResume: (info: Resume) => void }) {
     const [open, setOpen] = useState(false);
