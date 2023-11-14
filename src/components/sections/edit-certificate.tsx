@@ -48,7 +48,7 @@ export function EditCertificate({ resume, setResume }: { resume: Resume, setResu
                 Edit
             </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent>
             <DialogHeader>
                 <DialogTitle>Edit Info</DialogTitle>
             </DialogHeader>

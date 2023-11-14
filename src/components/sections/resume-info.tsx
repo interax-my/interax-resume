@@ -11,10 +11,10 @@ export default function ResumeInfo({ resume, setResume }: { resume: Resume | nul
   const getEducation = () => resume && resume.education ? resume.education.map((e, index) => (
     <div key={ `edu-${index}` } className="mb-2">
       <li>
-        <span className="font-semibold text-primary">{ e.college ?? 'N/A'}</span>
+        <span className="font-semibold text-primary">{ e.degree ?? 'N/A'}</span>
       </li>
       <li>
-        <span className="font-semibold text-primary">Degree</span>: { e.degree ?? 'N/A' }
+        <span className="font-semibold text-primary">College</span>: { e.college ?? 'N/A' }
       </li>
       <li>
         <span className="font-semibold text-primary">Location</span>: { e.location ?? 'N/A' }

@@ -48,7 +48,7 @@ export function EditPersonalInfo({ resume, setResume }: { resume: Resume, setRes
                 Edit
             </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent>
             <DialogHeader>
                 <DialogTitle>Edit Info</DialogTitle>
             </DialogHeader>

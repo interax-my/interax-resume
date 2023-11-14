@@ -48,7 +48,7 @@ export function EditExperience({ resume, setResume }: { resume: Resume, setResum
                 Edit
             </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent>
             <DialogHeader>
                 <DialogTitle>Edit Info</DialogTitle>
             </DialogHeader>
