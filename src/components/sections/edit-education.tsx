@@ -16,6 +16,7 @@ import { MinusIcon, PlusIcon } from "@radix-ui/react-icons"
 import { EditIcon } from "lucide-react"
 import { useState } from "react"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { Separator } from "@/components/ui/seperator"
 
 export function EditEducation({ resume, setResume }: { resume: Resume, setResume: (info: Resume) => void }) {
     const [open, setOpen] = useState(false);
@@ -70,7 +71,7 @@ export function EditEducation({ resume, setResume }: { resume: Resume, setResume
             <DialogHeader>
                 <DialogTitle>Edit Info</DialogTitle>
             </DialogHeader>
-            <ScrollArea className="h-full">
+            <ScrollArea className="h-full px-3">
                 <div className="grid gap-5 py-4">
                 <div className="grid grid-cols-5 gap-4 items-center">
                     <h4 className="text-sm font-medium text-primary col-span-4">Education</h4>
@@ -164,6 +165,7 @@ export function EditEducation({ resume, setResume }: { resume: Resume, setResume
                             className="col-span-3"
                             />
                         </div>
+                        <Separator className="mt-4 mb-6" />
                     </div>
                 ) )}
             </div>

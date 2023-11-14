@@ -53,7 +53,7 @@ export function EditPersonalInfo({ resume, setResume }: { resume: Resume, setRes
             <DialogHeader>
                 <DialogTitle>Edit Info</DialogTitle>
             </DialogHeader>
-            <ScrollArea className="h-full">
+            <ScrollArea className="h-full px-3">
                 <div className="grid gap-4 py-4">
                     <h4 className="text-sm font-medium text-primary">Personal Info</h4>
                     <div className="grid grid-cols-4 items-center gap-4">
