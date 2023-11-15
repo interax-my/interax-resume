@@ -1,18 +1,18 @@
 //todo: optimize token count
-export const getAiBody = ( prompt: string ) => {
-    return {
-        prompt: prompt,
-        model: 'command',
-        max_tokens: 2000,
-        temperature: 0.3,
-        stream: false,
-        prompt_truncation: 'off',
-        citation_quality: 'fast',
-    };
-}
+export const getAiBody = (prompt: string) => {
+  return {
+    prompt: prompt,
+    model: 'command',
+    max_tokens: 2000,
+    temperature: 0.3,
+    stream: false,
+    prompt_truncation: 'off',
+    citation_quality: 'fast',
+  };
+};
 
 export const generateExtractPdfPrompt = (content: string) => {
-    return `Given a resume in text format below, please extract the following information and provide the results in a JSON object:
+  return `Given a resume in text format below, please extract the following information and provide the results in a JSON object. Response only with the JSON object: 
 
     ###resume content###
     ${content}
@@ -48,7 +48,7 @@ export const generateExtractPdfPrompt = (content: string) => {
           - Location
           - Dates worked
           - Title
-          - List of accomplishments or results
+          - List of responsibilities
     
     6. Certifications:
        - List of certifications
@@ -94,9 +94,8 @@ export const generateExtractPdfPrompt = (content: string) => {
           "location": "Cleveland, OH",
           "datesWorked": "August 2016 - Present",
           "title": "Title, Department",
-          "accomplishments": [
-            "Most relevant accomplishment or results",
-            "Most relevant accomplishment or results"
+          "responsibilities": [
+            "...",
           ]
         },
         {
@@ -104,9 +103,8 @@ export const generateExtractPdfPrompt = (content: string) => {
           "location": "Cleveland, OH",
           "datesWorked": "January 2015 - July 2016",
           "title": "Intern, Department",
-          "accomplishments": [
-            "Most relevant accomplishment or results",
-            "Most relevant accomplishment or results"
+          "responsibilities": [
+            "...",
           ]
         }
       ],
@@ -117,4 +115,41 @@ export const generateExtractPdfPrompt = (content: string) => {
         }
       ]
     }`;
-}
+};
+
+export const generateImproveResumePrompt = (content: string) => {
+  return `
+  ### Instruction ###
+  You are a career consultant reviewing a resume information in JSON format. You will analyse the resume and attempt to improve it to perfection, by correcting typos, grammar mistakes, and common errors in resume. Suggest improvements that directly relate to the resume and avoid generic suggestion. You will provide 2 types of suggestions, improvements - for improving the quality of the resume, corrections - for fixing detected mistakes in the resume.
+    
+  You will provide a JSON object with the suggested improvements.
+
+  Below are some guidelines you can also use to improve the resume:
+  1. Location should be generic and not specific as it is sensitive information.
+  2. Every job experience should have list of responsibilities with this format: "<<responsiblity>> using <<skillset>>". Example, "Develop web application using React JS, PHP, and Mysql".
+  3. Email must be professional sounding, and avoid use of random numbering (except for date of born).
+ 
+  ### Output Format And Sample Data ###
+  {
+    "improvements": [
+        "Mention skill sets used or learnt in your job responbility", 
+        improvement2, 
+        ...
+    ],
+    "corrections": [
+      {
+        "error": "The location should not be specific",
+        "suggestion": "Change to <City>, <State>."
+      },
+      {
+        "error": "Capitalization error.",
+        "suggestion": "Change software engineer to Software Engineer in job title."
+      }, 
+      ...
+    ]
+  }
+  ### Input ###
+  ${content}
+  ### Output ###
+  `;
+};
