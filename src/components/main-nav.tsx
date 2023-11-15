@@ -20,7 +20,7 @@ export default function MainNav() {
             </div>
           </Link>
           <div className="flex space-x-4">
-            <Link
+            {/* <Link
               href="/page-1"
               className={cn("text-sm font-medium transition-colors hover:text-primary", pathname == "/login" ? "text-foreground" : "text-muted-foreground")}
             >
@@ -31,7 +31,7 @@ export default function MainNav() {
               className={cn("text-sm font-medium transition-colors hover:text-primary", pathname == "/register" ? "text-foreground" : "text-muted-foreground")}
             >
               Page 2
-            </Link>
+            </Link> */}
             <ModeToggle></ModeToggle>
           </div>
         </nav>
