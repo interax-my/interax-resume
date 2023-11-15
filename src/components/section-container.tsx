@@ -13,12 +13,13 @@ interface SectionContainerProp {
   isAutoOpen?: boolean,
   children: React.ReactNode,
   accordionRef?: RefObject<HTMLButtonElement> | null,
+  onChange?: () => void
 }
 
-export default function SectionContainer( { title, description = null, isAutoOpen = false, children, accordionRef = null }: SectionContainerProp ) {
+export default function SectionContainer( { title, description = null, isAutoOpen = false, children, accordionRef = null, onChange = undefined }: SectionContainerProp ) {
   return (
     <Card className="w-full">
-        <Accordion type="single" collapsible defaultValue={ isAutoOpen ? 'item-1' : '' }>
+        <Accordion type="single" collapsible defaultValue={ isAutoOpen ? 'item-1' : '' } onChange={onChange}>
         <AccordionItem value="item-1" className="border-0">
           <CardHeader>
             <AccordionTrigger className="text-start" ref={ accordionRef }>

@@ -9,10 +9,13 @@ import { useRef, useState } from 'react';
 export default function Home() {
   const [resumeInfo, setResumeInfo] = useState<Resume | null>(null);
   const [suggestions, setSuggestions] = useState<any>(null);
+  const [infoExpanded, setInfoExpanded] = useState(false);
   const infoAccordionRef = useRef<HTMLButtonElement>(null);
 
   const toggleInfoAccordion = () => {
+    if (infoExpanded) return;
     infoAccordionRef.current?.click();
+    setInfoExpanded(true);
   }
 
   return (
@@ -29,6 +32,7 @@ export default function Home() {
           resume={resumeInfo}
           setResume={setResumeInfo}
           setSuggestions={setSuggestions}
+          onChange={() => setInfoExpanded(!infoExpanded)}
         />
       </section>
       <section className='w-full'>

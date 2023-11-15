@@ -18,9 +18,10 @@ interface ResumeInfoProp {
   setResume: (info: Resume) => void, 
   setSuggestions: Dispatch<any>,
   accordionRef: RefObject<HTMLButtonElement>,
+  onChange?: () => void
 }
 
-export default function ResumeInfo({ resume, setResume, setSuggestions, accordionRef }: ResumeInfoProp) {
+export default function ResumeInfo({ resume, setResume, setSuggestions, accordionRef, onChange }: ResumeInfoProp) {
   const [loading, setLoading] = useState(false);
 
   const handleSuggestImprovements = () => {
@@ -138,7 +139,7 @@ export default function ResumeInfo({ resume, setResume, setSuggestions, accordio
   );
 
   return (
-    <SectionContainer title={"Resume Info"} description={"Double-check the Details to Make Sure Everything is Accurate"} accordionRef={accordionRef}>
+    <SectionContainer title={"Resume Info"} description={"Double-check the Details to Make Sure Everything is Accurate"} accordionRef={accordionRef} onChange={onChange}>
       <ul>
         <li>
           <div className="grid grid-cols-4 gap-4 items-center">
