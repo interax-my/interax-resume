@@ -24,7 +24,7 @@ export type Resume = {
         location: string | null;
         datesWorked: string | null;
         title: string | null;
-        accomplishments: string[];
+        responsibilities: string[];
     }[];
     certifications: {
         name: string | null;

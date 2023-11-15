@@ -25,7 +25,7 @@ export function EditExperience({ resume, setResume }: { resume: Resume, setResum
         location: string | null;
         datesWorked: string | null;
         title: string | null;
-        accomplishments: string[];
+        responsibilities: string[];
     }[]>(resume.experience ?? []);
 
     const onSubmit = (event: { preventDefault: () => void }) => {
@@ -48,7 +48,7 @@ export function EditExperience({ resume, setResume }: { resume: Resume, setResum
                 location: null,
                 datesWorked: null,
                 title: null, 
-                accomplishments: [],
+                responsibilities: [],
             },
         ];
         setExperience(item);
@@ -59,16 +59,16 @@ export function EditExperience({ resume, setResume }: { resume: Resume, setResum
         setExperience(item);
     };
 
-    const addAccomplishment = (index: number) => {
+    const addResponsibilities = (index: number) => {
         const item = [ ...experience];
-        item[index].accomplishments.push('')
+        item[index].responsibilities.push('')
         setExperience(item);
      };
      
-    const removeAccomplishment = (index: number, j: number) => {
+    const removeResponsibilities = (index: number, j: number) => {
         const exp = [...experience];
-        const item = exp[index].accomplishments.filter((_, i) => i !== j);
-        exp[index].accomplishments = item;
+        const item = exp[index].responsibilities.filter((_, i) => i !== j);
+        exp[index].responsibilities = item;
         setExperience(exp);
     };
      
@@ -165,26 +165,26 @@ export function EditExperience({ resume, setResume }: { resume: Resume, setResum
                         <div className="grid grid-cols-5 gap-4 items-center">
                             <Label className="col-span-4">Accomplishment</Label>
                             <div className="col-span-1 flex justify-end">
-                                <Button variant="secondary" size="icon" onClick={() => addAccomplishment(index)}>
+                                <Button variant="secondary" size="icon" onClick={() => addResponsibilities(index)}>
                                     <PlusIcon className="h-4 w-4" />
                                 </Button>
                             </div>
                         </div>
                         <ul>
-                        { e.accomplishments.map((a, i) => (
+                        { e.responsibilities.map((a, i) => (
                             <li key={ `edit-a-${index}` } className="list-disc">
                                 <div className="grid grid-cols-5 gap-4 items-center mb-2">
                                     <Input
                                     value={ a ?? '' }
                                     onChange={(e) => {
                                         const edited = [...experience];
-                                        edited[index].accomplishments[i] = e.target.value;
+                                        edited[index].responsibilities[i] = e.target.value;
                                         setExperience(edited);
                                     }}
                                     className="col-span-4"
                                     />
                                     <div className="col-span-1 flex justify-end">
-                                        <Button variant="secondary" size="icon" onClick={() => removeAccomplishment(index, i)}>
+                                        <Button variant="secondary" size="icon" onClick={() => removeResponsibilities(index, i)}>
                                             <MinusIcon className="h-4 w-4" />
                                         </Button>
                                     </div>
