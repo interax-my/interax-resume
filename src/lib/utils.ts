@@ -11,6 +11,14 @@ export const tryParseJson = (str: string) => {
 
     let txt = str.replaceAll('```json', '');
     txt = txt.replaceAll('```', '');
+    txt = txt.replace(/\\n/g, "\\n")
+              .replace(/\\'/g, "\\'")
+              .replace(/\\"/g, '\\"')
+              .replace(/\\&/g, "\\&")
+              .replace(/\\r/g, "\\r")
+              .replace(/\\t/g, "\\t")
+              .replace(/\\b/g, "\\b")
+              .replace(/\\f/g, "\\f");
     txt.replace(regex, '')
     return JSON.parse(txt);
   } catch (e) {
