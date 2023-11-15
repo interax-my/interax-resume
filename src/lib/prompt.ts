@@ -120,9 +120,7 @@ export const generateExtractPdfPrompt = (content: string) => {
 export const generateImproveResumePrompt = (content: string) => {
   return `
   ### Instruction ###
-  You are a career consultant reviewing a resume information in JSON format. You will analyse the resume and attempt to improve it to perfection, by correcting typos, grammar mistakes, and common errors in resume. Suggest improvements that directly relate to the resume and avoid generic suggestion. You will provide 2 types of suggestions, improvements - for improving the quality of the resume, corrections - for fixing detected mistakes in the resume.
-    
-  You will provide a JSON object with the suggested improvements.
+  You are a career consultant reviewing a resume information in JSON format. You will analyse the resume and attempt to improve it to perfection, by correcting typos, grammar mistakes, and common errors in resume. Suggest improvements that directly relate to the resume and avoid generic suggestion. You will provide 2 types of suggestions, improvements - for improving the quality of the resume, corrections - for fixing detected mistakes in the resume. Make sure all suggestions are self contained and does not require external references.
 
   Below are some guidelines you can also use to improve the resume:
   1. Location should be generic and not specific as it is sensitive information.
@@ -132,9 +130,7 @@ export const generateImproveResumePrompt = (content: string) => {
   ### Output Format And Sample Data ###
   {
     "improvements": [
-        "Mention skill sets used or learnt in your job responbility", 
-        improvement2, 
-        ...
+        "Mention skill sets used or learnt in your job responbility"
     ],
     "corrections": [
       {
@@ -144,12 +140,12 @@ export const generateImproveResumePrompt = (content: string) => {
       {
         "error": "Capitalization error.",
         "suggestion": "Change software engineer to Software Engineer in job title."
-      }, 
-      ...
+      }
     ]
   }
   ### Input ###
   ${content}
-  ### Output ###
+  
+  Respond only with a JSON object with the suggested improvements.
   `;
 };
