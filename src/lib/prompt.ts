@@ -12,7 +12,7 @@ export const getAiBody = (prompt: string) => {
 };
 
 export const generateExtractPdfPrompt = (content: string) => {
-  return `Given a resume in text format below, please extract the following information and provide the results in a JSON object. Response only with the JSON object: 
+  return `Given a resume in text format below, please extract the following information and provide the results in a JSON object.
 
     ###resume content###
     ${content}
@@ -114,7 +114,9 @@ export const generateExtractPdfPrompt = (content: string) => {
           "expiry": "2023-04-31"
         }
       ]
-    }`;
+    }
+    
+    Respond only with a JSON object.`;
 };
 
 export const generateImproveResumePrompt = (content: string) => {

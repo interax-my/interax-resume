@@ -11,6 +11,7 @@ import { Loader2 } from "lucide-react";
 import axios from "axios";
 import { tryParseJson } from "@/lib/utils";
 import { Dispatch, useState } from "react";
+import { toast } from "@/components/ui/use-toast";
 
 export default function ResumeInfo({ resume, setResume, setSuggestions }: { resume: Resume | null, setResume: (info: Resume) => void, setSuggestions: Dispatch<any> }) {
   const [loading, setLoading] = useState(false);
@@ -19,9 +20,17 @@ export default function ResumeInfo({ resume, setResume, setSuggestions }: { resu
     setLoading(true);
     axios.post('api/process-resume', { resumeObj: resume })
       .then(data => {
-        const parsedData = tryParseJson(data.data.data);
-        setSuggestions(parsedData);
-        setLoading(false);
+        try {
+          const parsedData = tryParseJson(data.data.data);
+          setSuggestions(parsedData);
+          setLoading(false);
+        } catch (_) {
+            toast({
+                variant: "destructive",
+                title: "Uh oh! Something went wrong.",
+                description: 'Unable to parse improvements.',
+            }); 
+        }
       });
   }
 
