@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/mode-toggle";
 
 export default function MainNav() {
@@ -20,18 +19,6 @@ export default function MainNav() {
             </div>
           </Link>
           <div className="flex space-x-4">
-            {/* <Link
-              href="/page-1"
-              className={cn("text-sm font-medium transition-colors hover:text-primary", pathname == "/login" ? "text-foreground" : "text-muted-foreground")}
-            >
-              Page 1
-            </Link>
-            <Link
-              href="/page-2"
-              className={cn("text-sm font-medium transition-colors hover:text-primary", pathname == "/register" ? "text-foreground" : "text-muted-foreground")}
-            >
-              Page 2
-            </Link> */}
             <ModeToggle></ModeToggle>
           </div>
         </nav>

@@ -12,6 +12,7 @@ import { fileToBase64 } from "@/lib/base64";
 import { Loader2 } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 import { Resume } from "@/lib/models/resume";
+import { tryParseJson } from "@/lib/utils";
 
 export function UploadResume({ onResumeInfoExtracted }: { onResumeInfoExtracted: (info: Resume) => void }) {
     const [resumeFile, setResumeFile] = useState<File | null>(null);
@@ -30,36 +31,30 @@ export function UploadResume({ onResumeInfoExtracted }: { onResumeInfoExtracted:
 
         await axios.post('api/parse-resume', { file: base64String })
         .then(response => {
-            tryParseJson(response.data.data);
+            try {
+                const json: Resume = tryParseJson(response.data.data);
+        onResumeInfoExtracted(json);
+        setSuccess(true);
+} catch (_) {
+        toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: 'Unable to parse resume data.',
+        }); 
+        }
         }).catch(error => {
-            toast({
-                variant: "destructive",
-                title: "Uh oh! Something went wrong.",
-                description: error.response.data.message,
-            });
+        toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: error.response.data.message,
+        });
         }).finally(() => {
-            setProcessing(false);
+        setProcessing(false);
         });
     };
-
-    const tryParseJson = (str: string) => {
-        try {
-            let txt = str.replaceAll('```json', '');
-            txt = txt.replaceAll('```', '');
-            const json: Resume = JSON.parse(txt);
-            onResumeInfoExtracted(json);
-            setSuccess(true);
-        } catch (e) {
-            toast({
-                variant: "destructive",
-                title: "Uh oh! Something went wrong.",
-                description: 'Unable to parse resume data.',
-            });
-        }
-    }
     
     return (
-        <SectionContainer title={"Unlock Your Potential"} description={ "Upload Your Resume for a Personalized Career Checkup" } isOpen = { true }>
+        <SectionContainer title={"Unlock Your Potential"} description={ "Upload Your Resume for a Personalized Career Checkup" } isAutoOpen = { true }>
             <div className="grid grid-cols-12 gap-6">
                 <div className="col-span-12 md:col-span-8">
                     <div className="rounded-md border px-4 py-3 text-sm text-center">

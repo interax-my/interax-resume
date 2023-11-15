@@ -10,18 +10,35 @@ import { Button } from "../ui/button";
 import { Loader2 } from "lucide-react";
 import axios from "axios";
 import { tryParseJson } from "@/lib/utils";
-import { Dispatch, useState } from "react";
+import { Dispatch, RefObject, useState } from "react";
+import { toast } from "@/components/ui/use-toast";
 
-export default function ResumeInfo({ resume, setResume, setSuggestions }: { resume: Resume | null, setResume: (info: Resume) => void, setSuggestions: Dispatch<any> }) {
+interface ResumeInfoProp {
+  resume: Resume | null, 
+  setResume: (info: Resume) => void, 
+  setSuggestions: Dispatch<any>,
+  accordionRef: RefObject<HTMLButtonElement>,
+  onChange?: () => void
+}
+
+export default function ResumeInfo({ resume, setResume, setSuggestions, accordionRef, onChange }: ResumeInfoProp) {
   const [loading, setLoading] = useState(false);
 
   const handleSuggestImprovements = () => {
     setLoading(true);
     axios.post('api/process-resume', { resumeObj: resume })
       .then(data => {
-        const parsedData = tryParseJson(data.data.data);
-        setSuggestions(parsedData);
-        setLoading(false);
+        try {
+          const parsedData = tryParseJson(data.data.data);
+          setSuggestions(parsedData);
+          setLoading(false);
+        } catch (_) {
+            toast({
+                variant: "destructive",
+                title: "Uh oh! Something went wrong.",
+                description: 'Unable to parse improvements.',
+            }); 
+        }
       });
   }
 
@@ -122,7 +139,7 @@ export default function ResumeInfo({ resume, setResume, setSuggestions }: { resu
   );
 
   return (
-    <SectionContainer title={"Resume Info"} description={"Double-check the Details to Make Sure Everything is Accurate"} isOpen={resume !== null}>
+    <SectionContainer title={"Resume Info"} description={"Double-check the Details to Make Sure Everything is Accurate"} accordionRef={accordionRef} onChange={onChange}>
       <ul>
         <li>
           <div className="grid grid-cols-4 gap-4 items-center">

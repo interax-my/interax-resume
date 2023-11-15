@@ -21,7 +21,7 @@ export const tryParseJson = (str: string) => {
               .replace(/\\f/g, "\\f");
     txt.replace(regex, '')
     return JSON.parse(txt);
-  } catch (e) {
-    console.log('Error parsing JSON');
+  } catch (_) {
+    throw('Error parsing JSON')
   }
 };
