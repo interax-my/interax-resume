@@ -5,21 +5,23 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { RefObject } from "react"
 
 interface SectionContainerProp {
   title: string,
   description?: string | null,
-  isOpen?: boolean,
+  isAutoOpen?: boolean,
   children: React.ReactNode,
+  accordionRef?: RefObject<HTMLButtonElement> | null,
 }
 
-export default function SectionContainer( { title, description = null, isOpen = false, children }: SectionContainerProp ) {
+export default function SectionContainer( { title, description = null, isAutoOpen = false, children, accordionRef = null }: SectionContainerProp ) {
   return (
     <Card className="w-full">
-        <Accordion type="single" collapsible defaultValue={ isOpen ? 'item-1' : '' }>
+        <Accordion type="single" collapsible defaultValue={ isAutoOpen ? 'item-1' : '' }>
         <AccordionItem value="item-1" className="border-0">
           <CardHeader>
-            <AccordionTrigger className="text-start">
+            <AccordionTrigger className="text-start" ref={ accordionRef }>
               <div>
                 <CardTitle>{ title }</CardTitle>
                 { description && (

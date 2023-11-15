@@ -54,7 +54,7 @@ export function UploadResume({ onResumeInfoExtracted }: { onResumeInfoExtracted:
     };
     
     return (
-        <SectionContainer title={"Unlock Your Potential"} description={ "Upload Your Resume for a Personalized Career Checkup" } isOpen = { true }>
+        <SectionContainer title={"Unlock Your Potential"} description={ "Upload Your Resume for a Personalized Career Checkup" } isAutoOpen = { true }>
             <div className="grid grid-cols-12 gap-6">
                 <div className="col-span-12 md:col-span-8">
                     <div className="rounded-md border px-4 py-3 text-sm text-center">

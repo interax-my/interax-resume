@@ -10,10 +10,17 @@ import { Button } from "../ui/button";
 import { Loader2 } from "lucide-react";
 import axios from "axios";
 import { tryParseJson } from "@/lib/utils";
-import { Dispatch, useState } from "react";
+import { Dispatch, RefObject, useState } from "react";
 import { toast } from "@/components/ui/use-toast";
 
-export default function ResumeInfo({ resume, setResume, setSuggestions }: { resume: Resume | null, setResume: (info: Resume) => void, setSuggestions: Dispatch<any> }) {
+interface ResumeInfoProp {
+  resume: Resume | null, 
+  setResume: (info: Resume) => void, 
+  setSuggestions: Dispatch<any>,
+  accordionRef: RefObject<HTMLButtonElement>,
+}
+
+export default function ResumeInfo({ resume, setResume, setSuggestions, accordionRef }: ResumeInfoProp) {
   const [loading, setLoading] = useState(false);
 
   const handleSuggestImprovements = () => {
@@ -131,7 +138,7 @@ export default function ResumeInfo({ resume, setResume, setSuggestions }: { resu
   );
 
   return (
-    <SectionContainer title={"Resume Info"} description={"Double-check the Details to Make Sure Everything is Accurate"} isOpen={resume !== null}>
+    <SectionContainer title={"Resume Info"} description={"Double-check the Details to Make Sure Everything is Accurate"} accordionRef={accordionRef}>
       <ul>
         <li>
           <div className="grid grid-cols-4 gap-4 items-center">
