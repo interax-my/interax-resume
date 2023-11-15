@@ -11,11 +11,19 @@ export default function Home() {
   const [suggestions, setSuggestions] = useState<any>(null);
   const [infoExpanded, setInfoExpanded] = useState(false);
   const infoAccordionRef = useRef<HTMLButtonElement>(null);
+  const [improveExpanded, setImproveExpanded] = useState(false);
+  const improveAccordionRef = useRef<HTMLButtonElement>(null);
 
   const toggleInfoAccordion = () => {
     if (infoExpanded) return;
     infoAccordionRef.current?.click();
     setInfoExpanded(true);
+  }
+
+  const toggleImproveAccordion = () => {
+    if (improveExpanded) return;
+    improveAccordionRef.current?.click();
+    setImproveExpanded(true);
   }
 
   return (
@@ -31,12 +39,15 @@ export default function Home() {
           accordionRef={infoAccordionRef}
           resume={resumeInfo}
           setResume={setResumeInfo}
-          setSuggestions={setSuggestions}
+          setSuggestions={(suggestions) => {
+            setSuggestions(suggestions);
+            toggleImproveAccordion();
+          }}
           onChange={() => setInfoExpanded(!infoExpanded)}
         />
       </section>
       <section className='w-full'>
-        <Improvements suggestions={suggestions} />
+        <Improvements suggestions={suggestions} accordionRef={improveAccordionRef} onChange={() => setImproveExpanded(!improveExpanded)} />
       </section>
     </main>
   )

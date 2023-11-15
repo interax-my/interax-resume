@@ -33,23 +33,23 @@ export function UploadResume({ onResumeInfoExtracted }: { onResumeInfoExtracted:
         .then(response => {
             try {
                 const json: Resume = tryParseJson(response.data.data);
-                onResumeInfoExtracted(json);
-                setSuccess(true);
-            } catch (_) {
-                toast({
-                    variant: "destructive",
-                    title: "Uh oh! Something went wrong.",
-                    description: 'Unable to parse resume data.',
-                }); 
-            }
+        onResumeInfoExtracted(json);
+        setSuccess(true);
+} catch (_) {
+        toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: 'Unable to parse resume data.',
+        }); 
+        }
         }).catch(error => {
-            toast({
-                variant: "destructive",
-                title: "Uh oh! Something went wrong.",
-                description: error.response.data.message,
-            });
+        toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: error.response.data.message,
+        });
         }).finally(() => {
-            setProcessing(false);
+        setProcessing(false);
         });
     };
     

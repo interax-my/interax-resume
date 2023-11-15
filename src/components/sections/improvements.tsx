@@ -1,12 +1,17 @@
 import SectionContainer from "@/components/section-container"
+import { RefObject } from "react";
 
 export default function Improvements({
-  suggestions
+  suggestions,
+  accordionRef,
+  onChange
 }: {
   suggestions: {
     improvements: string[],
     corrections: { error: string, suggestion: string }[]
-  } | null
+  } | null,
+  accordionRef: RefObject<HTMLButtonElement>,
+  onChange?: () => void
 }) {
   const improvements = suggestions && suggestions.improvements;
   const corrections = suggestions && suggestions.corrections;
@@ -39,7 +44,7 @@ export default function Improvements({
   }
 
   return (
-    <SectionContainer title={"Suggested Improvements"}>
+    <SectionContainer title={"Suggested Improvements"} accordionRef={accordionRef} onChange={onChange}>
       <h4 className="font-semibold my-2">Suggestions</h4>
       <ul className="list-disc list-outside pl-4 mb-8">
         {renderImprovements()}
