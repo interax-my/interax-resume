@@ -36,7 +36,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: 'Unable to process resume.' }, { status: 500 });
     }
 
-    return NextResponse.json(json.generations[0].text);
+    return NextResponse.json({data: json.generations[0].text});
   } catch (e: any) {
     return NextResponse.json({ message: e.message }, { status: 500 });
   }

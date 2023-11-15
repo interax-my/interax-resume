@@ -7,8 +7,24 @@ import { EditExperience } from "./edit-experience";
 import { EditCertificate } from "./edit-certificate";
 import { EditSkill } from "./edit-skill";
 import { Button } from "../ui/button";
+import { Loader2 } from "lucide-react";
+import axios from "axios";
+import { tryParseJson } from "@/lib/utils";
+import { Dispatch, useState } from "react";
 
-export default function ResumeInfo({ resume, setResume, handleSuggestImprovements }: { resume: Resume | null, setResume: (info: Resume) => void, handleSuggestImprovements: () => void }) {
+export default function ResumeInfo({ resume, setResume, setSuggestions }: { resume: Resume | null, setResume: (info: Resume) => void, setSuggestions: Dispatch<any> }) {
+  const [loading, setLoading] = useState(false);
+
+  const handleSuggestImprovements = () => {
+    setLoading(true);
+    axios.post('api/process-resume', { resumeObj: resume })
+      .then(data => {
+        const parsedData = tryParseJson(data.data.data);
+        setSuggestions(parsedData);
+        setLoading(false);
+      });
+  }
+
   const getEducation = () => resume && resume.education && resume.education.length !== 0 ? resume.education.map((e, index) => (
     <div key={`edu-${index}`} className="mb-2">
       <li>
@@ -189,8 +205,11 @@ export default function ResumeInfo({ resume, setResume, handleSuggestImprovement
         </li>
         {getSkill()}
       </ul>
-      <div className="flex">
-        <Button onClick={ handleSuggestImprovements }>Suggest Improvements</Button>
+      <div className="flex justify-end">
+        <Button onClick={handleSuggestImprovements} disabled={loading || resume == null}>
+          {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+          Suggest Improvements
+        </Button>
       </div>
     </SectionContainer>
   )
