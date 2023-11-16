@@ -121,33 +121,184 @@ export const generateExtractPdfPrompt = (content: string) => {
 
 export const generateImproveResumePrompt = (content: string) => {
   return `
-  ### Instruction ###
-  You are a career consultant reviewing a resume information in JSON format. You will analyse the resume and attempt to improve it to perfection, by correcting typos, grammar mistakes, and common errors in resume. Suggest improvements that directly relate to the resume and avoid generic suggestion. You will provide 2 types of suggestions, improvements - for improving the quality of the resume, corrections - for fixing detected mistakes in the resume. Make sure all suggestions are self contained and does not require external references.
+  You are a career consultant, and provide a resume improvement service. You will suggest improvements to extracted information from a resume, located in the ### Input ### section. You also will check if the resume does not met the below checklist.
 
-  Below are some guidelines you can also use to improve the resume:
-  1. Location should be generic and not specific as it is sensitive information.
-  2. Every job experience should have list of responsibilities with this format: "<<responsiblity>> using <<skillset>>". Example, "Develop web application using React JS, PHP, and Mysql".
-  3. Email must be professional sounding, and avoid use of random numbering (except for date of born).
- 
-  ### Output Format And Sample Data ###
+  Given input below, find out if any of the followings are not met:
+  1. Location should not be too specific as to be personally identifiable.
+  2. Email address should not contain random numbers, and must sound professional.
+  3. Every experience should contain the location.
+
+  If an item is not met, insert into a JSON object. The JSON object should only contain a list of strings that contains your findings.
+
+  IMPORTANT: You must respond *ONLY* with a JSON object and nothing else.
+
+    ### Input ###
   {
-    "improvements": [
-        "Mention skill sets used or learnt in your job responbility"
+    "personalInfo":{
+        "name":"John Doe",
+        "occupation":"Full Stack Developer",
+        "experience":2,
+        "location":"Cyberjaya, Selangor",
+        "email":"john@gmail.com"
+    },
+    "education":[
+        {
+          "college":"Universiti Tenaga Nasional",
+          "location":"",
+          "graduationDate":"Dec 2021",
+          "degree":"Bachelor of Computer Science (Software Engineering)",
+          "gpa":3.00
+        },
+        {
+          "college":"Kolej Professional Mara Beranang",
+          "location":"",
+          "graduationDate":"Oct 2018",
+          "degree":"FHND in Computing (System Development)",
+          "gpa":3.00
+        }
     ],
-    "corrections": [
-      {
-        "error": "The location should not be specific",
-        "suggestion": "Change to <City>, <State>."
-      },
-      {
-        "error": "Capitalization error.",
-        "suggestion": "Change software engineer to Software Engineer in job title."
-      }
+    "relatedCourseworkProjects":[
+        {
+          "name":"Java Tutoring System for Malaysian Public Tertiary Schools",
+          "year":"Aug 2022 - Jan 2023",
+          "description":"Freelance project with XXX and BBB Berhad (funder) for an online Java tutoring system for students and teachers of secondary public schools in Malaysia."
+        },
+        {
+          "name":"AI-driven Call Analytics System",
+          "year":"Aug 2021 - Nov 2021",
+          "description":"Trained machine learning models and integrated them into a web prototype under the AI-driven Customer Call Analysis System, a XXX Seed Fund project."
+        },
+        {
+          "name":"Covid Hotspot Geolocation Alert (UNISAFE)",
+          "year":"",
+          "description":"Mobile Development"
+        },
+        {
+          "name":"NZ Labour Party Website",
+          "year":"",
+          "description":"Advanced Web Development"
+        }
+    ],
+    "skills":[
+        "OOP Programming",
+        "Web Development",
+        "PHP",
+        "MySQL",
+        "HTML",
+        "CSS",
+        "Javascript",
+        "React",
+        "Laravel",
+        "Python & Machine Learning",
+        "TensorFlow",
+        "sklearn",
+        "Flask",
+        "Mobile Development",
+        "Xamarin",
+        "Java",
+        "C#",
+        "Linux",
+        "Deployment (VPS and Containers)",
+        "CI/CD"
+    ],
+    "experience":[
+        {
+          "company":"AAA Digital Ltd",
+          "location":"",
+          "datesWorked":"May 2022 - present",
+          "title":"Full Stack Developer",
+          "responsibilities":[
+              "Developing and managing Sitecore and JSP websites for Singapore government agencies. Building and setting up DevOps workflow for the internal development team."
+          ]
+        },
+        {
+          "company":"BBB Axis",
+          "location":"",
+          "datesWorked":"Dec 2021 - Apr 2022",
+          "title":"Java Programmer",
+          "responsibilities":[
+              "Participated in the complete software development life cycle of a banking solution to a public bank in Brunei."
+          ]
+        },
+        {
+          "company":"CCC Berhad",
+          "location":"",
+          "datesWorked":"Aug 2021 - Nov 2021",
+          "title":"Software Tester Intern",
+          "responsibilities":[
+              "Conducted System Integration Testing (SIT), System Testing (ST), and User Acceptance Testing (UAT) on several systems developed by CCC and its vendors."
+          ]
+        },
+        {
+          "company":"EEE-IT Sdn Bhd",
+          "location":"",
+          "datesWorked":"Mar 2023 - present",
+          "title":"Mobile Developer",
+          "responsibilities":[
+              "Development of machine-learning integrated Flutter mobile application, aiming to help visually impaired person to detect text with support for 7 segment digit recognition."
+          ]
+        },
+        {
+          "company":"YCU R&D SDN BHD | FDA SDN BHD",
+          "location":"",
+          "datesWorked":"Aug 2021 - Nov 2021",
+          "title":"External Consultant & Developer",
+          "responsibilities":[
+              "Trained machine learning models and integrated them into a web prototype under the AI-driven Customer Call Analysis System, a FDA Seed Fund project."
+          ]
+        },
+        {
+          "company":"Yayasan Canselor UT",
+          "location":"",
+          "datesWorked":"Aug 2022 - Jan 2023",
+          "title":"Full Stack Developer",
+          "responsibilities":[
+              "Freelance project with XXX and FDA Berhad (funder) for an online JAVA tutoring system for students and teachers of secondary public schools in Malaysia."
+          ]
+        }
+    ],
+    "certifications":[
+        {
+          "name":"AWS Partner: Accreditation (Technical)",
+          "expiry":""
+        },
+        {
+          "name":"Microsoft Certified: Azure Developer Associate",
+          "expiry":""
+        },
+        {
+          "name":"Microsoft Certified: DevOps Engineer Expert",
+          "expiry":""
+        }
     ]
   }
+  ### End Input ###
+
+  ### Output ###
+  {
+  "education": [
+  "Location information missing for Universiti Tenaga Nasional",
+  "Location information missing for Kolej Professional Mara Beranang"
+  ],
+  "relatedCourseworkProjects": [
+  "Year information missing for Covid Hotspot Geolocation Alert (UNISAFE)",
+  "Year information missing for NZ Labour Party Website"
+  ],
+  "experience": [
+  "Location information missing for AAA Digital Ltd",
+  "Location information missing for BBB Axis",
+  "Location information missing for CCC Berhad",
+  "Location information missing for EEE-IT Sdn Bhd",
+  "Location information missing for YCU R&D SDN BHD | FDA SDN BHD",
+  "Location information missing for Yayasan Canselor UT"
+  ]
+  }
+  ### End Output ###
+
   ### Input ###
   ${content}
-  
-  Respond only with a JSON object with the suggested improvements.
+  ### End Input ###
+
+  ### Output ###
   `;
 };
