@@ -1,4 +1,5 @@
 import SectionContainer from "@/components/section-container"
+import { Suggestions } from "@/lib/models/suggestions";
 import { RefObject } from "react";
 
 export default function Improvements({
@@ -6,54 +7,22 @@ export default function Improvements({
   accordionRef,
   onChange
 }: {
-  suggestions: {
-    improvements: string[],
-    corrections: { error: string, suggestion: string }[]
-  } | null,
+  suggestions: Suggestions,
   accordionRef: RefObject<HTMLButtonElement>,
   onChange?: () => void
 }) {
-  const improvements = suggestions && suggestions.improvements;
-  const corrections = suggestions && suggestions.corrections;
-
-  const renderImprovements = () => {
-    if (improvements && Array.isArray(improvements)) {
-      const mappedImprovements = improvements.map((improvement, index) => {
-        return <li key={index}>{improvement}</li>;
-      });
-
-      return mappedImprovements;
-    } else {
-      return <p>Nothing to see here.</p>
-    }
-  }
-  const renderCorrections = () => {
-    if (corrections && Array.isArray(corrections)) {
-      const mappedCorrections = corrections.map((correction, index) => {
-        return (
-          <li key={index}>
-            <span className="text-red-500 font-semibold">Error:</span> {correction.error} <br></br>
-            <span className="text-green-500 font-semibold">Correction:</span> {correction.suggestion}
-          </li>)
-      });
-
-      return mappedCorrections;
-    } else {
-      return <p>Nothing to see here.</p>
-    }
-  }
-
   return (
     <SectionContainer title={"Suggested Improvements"} accordionRef={accordionRef} onChange={onChange}>
-      <h4 className="font-semibold my-2">Suggestions</h4>
-      <ul className="list-disc list-outside pl-4 mb-8">
-        {renderImprovements()}
-      </ul>
-
-      <h4 className="font-semibold my-2">Corrections</h4>
-      <ul className="list-disc list-outside pl-4">
-        {renderCorrections()}
-      </ul>
+      {suggestions && Object.keys(suggestions).map((category, index) => (
+        <div key={index}>
+          <h3 className="font-semibold my-2 capitalize">{category}</h3>
+          <ul className="list-disc list-outside pl-4">
+            {suggestions[category].map((item: any, i: number) => (
+              <li key={i}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </SectionContainer>
   )
 }
