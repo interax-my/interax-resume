@@ -80,8 +80,12 @@ export function UploadResume({ onResumeInfoExtracted }: { onResumeInfoExtracted:
             </div>
             <div className="grid gap-2">
                 <Separator className="mt-4 mb-6" />
-                {resumeFile && <PDFViewer url={ URL.createObjectURL(resumeFile) }/>}
-                <div className="flex justify-end mt-4">
+                {resumeFile && (
+                    <div className="mb-4">
+                        <PDFViewer url={ URL.createObjectURL(resumeFile) }/>
+                    </div>
+                )}
+                <div className="flex justify-end">
                     <Button disabled={ isProcessing || resumeFile === null } className="w-full sm:w-auto" onClick={ onProcess }>
                         { isProcessing ? (
                             <>
