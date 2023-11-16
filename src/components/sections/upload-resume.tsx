@@ -23,8 +23,6 @@ export function UploadResume({ onResumeInfoExtracted }: { onResumeInfoExtracted:
     const onFileSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files.length > 0) {
             setResumeFile(event.target.files[0]);
-            const reader = new FileReader();
-            reader.readAsDataURL(event.target.files[0]);
         }
     };
 
