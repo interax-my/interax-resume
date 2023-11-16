@@ -5,14 +5,15 @@ import { UploadIcon } from "@radix-ui/react-icons";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { ProcessResume } from "./process-resume";
 import SectionContainer from "@/components/section-container";
 import axios from "axios";
 import { fileToBase64 } from "@/lib/base64";
-import { Loader2 } from "lucide-react";
+import { CheckCircle, Loader2 } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 import { Resume } from "@/lib/models/resume";
 import { tryParseJson } from "@/lib/utils";
+import { PDFViewer } from "@/components/pdf-viewer";
+import { Separator } from "@/components/ui/seperator";
 
 export function UploadResume({ onResumeInfoExtracted }: { onResumeInfoExtracted: (info: Resume) => void }) {
     const [resumeFile, setResumeFile] = useState<File | null>(null);
@@ -22,7 +23,9 @@ export function UploadResume({ onResumeInfoExtracted }: { onResumeInfoExtracted:
     const onFileSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files.length > 0) {
             setResumeFile(event.target.files[0]);
-        }    
+            const reader = new FileReader();
+            reader.readAsDataURL(event.target.files[0]);
+        }
     };
 
     const onProcess = async () => {
@@ -33,23 +36,23 @@ export function UploadResume({ onResumeInfoExtracted }: { onResumeInfoExtracted:
         .then(response => {
             try {
                 const json: Resume = tryParseJson(response.data.data);
-        onResumeInfoExtracted(json);
-        setSuccess(true);
-} catch (_) {
-        toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: 'Unable to parse resume data.',
-        }); 
-        }
+                onResumeInfoExtracted(json);
+                setSuccess(true);
+            } catch (_) {
+                toast({
+                variant: "destructive",
+                title: "Uh oh! Something went wrong.",
+                description: 'Unable to parse resume data.',
+                }); 
+            }
         }).catch(error => {
-        toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: error.response.data.message,
-        });
+            toast({
+            variant: "destructive",
+            title: "Uh oh! Something went wrong.",
+            description: error.response.data.message,
+            });
         }).finally(() => {
-        setProcessing(false);
+            setProcessing(false);
         });
     };
     
@@ -77,7 +80,26 @@ export function UploadResume({ onResumeInfoExtracted }: { onResumeInfoExtracted:
                     )} 
                 </div>
             </div>
-            <ProcessResume hasResume={ resumeFile !== null } isProcessing = { isProcessing } isSuccess = { success } onProcess = { onProcess } />
+            <div className="grid gap-2">
+                <Separator className="mt-4 mb-6" />
+                {resumeFile && <PDFViewer url={ URL.createObjectURL(resumeFile) }/>}
+                <div className="flex justify-end mt-4">
+                    <Button disabled={ isProcessing || resumeFile === null } className="w-full sm:w-auto" onClick={ onProcess }>
+                        { isProcessing ? (
+                            <>
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                Please wait
+                            </>
+                        ) : 'Extract Resume' }
+                        </Button>
+                </div>
+                { success && (
+                    <Label className="flex items-center font-semibold text-primary">
+                        <CheckCircle className="mr-2" />
+                        <span>Resume has been extracted successfully.</span>
+                    </Label>
+                ) }
+            </div>
         </SectionContainer>
     )
 }
