@@ -1,9 +1,22 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Interax Resume
+
+This is a Next.js project that leverages the power of Cohere AI and LangChain to provide a comprehensive review of a resume. The application uses Cohere's AI to extracts key information from the resume and to analyze the content, providing valuable suggestions for improvement.
 
 ## Getting Started
 
-First, run the development server:
+1. add your cohere api key to .env
+```bash
+COHERE_API_KEY=your-key
+```
 
+2. install dependencies
+```bash
+npm i
+# or
+npm install
+```
+
+3. run the development server:
 ```bash
 npm run dev
 # or
