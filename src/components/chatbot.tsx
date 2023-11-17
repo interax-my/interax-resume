@@ -5,22 +5,36 @@ import { Card } from '@/components/ui/card';
 import { Bot, Forward, Maximize2, Minus, Send, User } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/seperator';
+import axios from 'axios';
+import BouncingDotsLoader from '@/components/bouncing-dots';
 
 function Chatbot() {
     const [messages, setMessages] = useState<{ isUser: boolean; txt: string; }[]>([]);
     const [input, setInput] = useState('');
     const [isMinimized, setIsMinimized] = useState(true);
-    const responses = ['Hello! How can I assist you today?', 'Thank you for your message!'];
+    const [isLoading, setIsLoading] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
+    const [conversationId, setConversationId] = useState<string | null>(null);
 
     const sendMessage = (event: { preventDefault: () => void; }) => {
         event.preventDefault();
         if (!input) return;
-        const randomIndex = Math.floor(Math.random() * responses.length);
-        const response = responses[randomIndex];
-        setMessages([...messages, { isUser: true, txt: input }, { isUser: false, txt: response}]);
+        const message = input;
         setInput('');
+        setIsLoading(true);
+
+        setMessages(prevMessages => [...prevMessages, { isUser: true, txt: message }]);
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+
+        setConversationId(conversationId ?? Math.random().toString(36).substring(2, 15));
+
+        axios.post('api/chat', { message: message, conversationId: conversationId })
+        .then(response => {
+            setMessages(prevMessages => [...prevMessages, { isUser: false, txt: response.data }]);
+            messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+        }).finally(() => {
+            setIsLoading(false);
+        });
     };
 
     const toggleChat = () => {
@@ -43,15 +57,26 @@ function Chatbot() {
             <div className="p-4 flex flex-col flex-grow mt-auto overflow-y-auto gap-2">
                 {messages.map((message, index) => (
                 <div key={index} className="flex flex-col items-start gap-2">
-                    <div className="flex">
-                        { message.isUser ? <User className='mr-1 text-primary'/> : <Bot className='mr-1 text-primary'/>  }
-                        <span>{message.txt}</span>
+                    <div className="grid grid-cols-8 gap-1">
+                        { message.isUser ? <User className='mr-1 text-primary col-span-1'/> : <Bot className='mr-1 text-primary col-span-1'/>  }
+                        <span className='col-span-7'>{message.txt}</span>
                     </div>
                     {index < messages.length - 1 && (
                         <Separator className="my-1 opacity-50" />
                     )}
                 </div>
                 ))}
+                { isLoading && (
+                <div className="flex flex-col items-start gap-2">
+                    <Separator className="my-1 opacity-50" />
+                    <div className="grid grid-cols-8 gap-1">
+                        <Bot className='mr-1 text-primary col-span-1'/>
+                        <div className='col-span-7 pt-2'>
+                            <BouncingDotsLoader />
+                        </div>
+                    </div>
+                </div>
+                )}
                 <div ref={messagesEndRef} />
             </div>
             <form onSubmit={sendMessage} className="flex justify-between gap-1">
@@ -61,7 +86,7 @@ function Chatbot() {
                     onChange={(e) => setInput(e.target.value)}
                     placeholder="Type a message..."
                 />
-                 <Button type="submit" size="icon" disabled={ !input }>
+                <Button type="submit" size="icon" disabled={ !input || isLoading }>
                     <Forward className="h-4 w-4" />
                 </Button>
             </form>
