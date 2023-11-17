@@ -1,5 +1,5 @@
 import SectionContainer from "@/components/section-container"
-import { Suggestions } from "@/lib/models/suggestions";
+import { Suggestion } from "@/lib/models/suggestions";
 import { RefObject } from "react";
 
 export default function Improvements({
@@ -7,19 +7,23 @@ export default function Improvements({
   accordionRef,
   onChange
 }: {
-  suggestions: Suggestions,
+  suggestions: Suggestion,
   accordionRef: RefObject<HTMLButtonElement>,
   onChange?: () => void
 }) {
+  console.dir(suggestions);
+
   return (
     <SectionContainer title={"Suggested Improvements"} accordionRef={accordionRef} onChange={onChange}>
       {suggestions && Object.keys(suggestions).map((category, index) => (
         <div key={index}>
           <h3 className="font-semibold my-2 capitalize">{category}</h3>
           <ul className="list-disc list-outside pl-4">
-            {suggestions[category].map((item: any, i: number) => (
-              <li key={i}>{item}</li>
-            ))}
+            {!suggestions[category].answer ?
+              <li className="text-orange-500">{suggestions[category].suggestion}</li>
+              :
+              <li className="text-green-500">Nothing to improve.</li>
+            }
           </ul>
         </div>
       ))}
