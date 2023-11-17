@@ -32,7 +32,7 @@ function Chatbot() {
     }, [messages]);
 
     return (
-    <Card className={`fixed bottom-0 right-0 h-12 p-4 rounded shadow flex flex-col space-between ${isMinimized ? 'w-60' : 'md:h-[60vh] w-96'}`}>
+    <Card className={`fixed bottom-0 right-0 p-4 rounded shadow flex flex-col space-between h-12 ${isMinimized ? 'w-60' : 'h-4/5 md:h-[72vh] md:w-96'}`}>
         <div className="flex justify-between items-center">
             <Label className='text-primary'>{ isMinimized && 'Ask us anything' }</Label>
             <button onClick={ toggleChat} >{ isMinimized ? <Maximize2 className='text-primary h-4 w-4' /> : <Minus className='text-primary h-4 w-4' /> }</button>
@@ -40,7 +40,7 @@ function Chatbot() {
         {!isMinimized && (
         <>
             <Separator className='mt-2' />
-            <div className="p-4 rounded shadow flex flex-col flex-grow mt-auto overflow-y-auto gap-2">
+            <div className="p-4 flex flex-col flex-grow mt-auto overflow-y-auto gap-2">
                 {messages.map((message, index) => (
                 <div key={index} className="flex flex-col items-start gap-2">
                     <div className="flex">
