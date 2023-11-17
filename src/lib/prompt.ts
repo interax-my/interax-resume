@@ -121,179 +121,38 @@ export const generateExtractPdfPrompt = (content: string) => {
 
 export const generateImproveResumePrompt = (content: string) => {
   return `
-  You are a career consultant, and provide a resume improvement service. You will suggest improvements to extracted information from a resume, located in the ### Input ### section. You also will check if the resume does not met the below checklist.
+  You are a career consultants, you will look at each task below and do as instructed. After that, determine whether the task result is true or false. If the task cannot be finished due to lack in information, answer will be false. If the answer is false, provide justification and suggestion with less than 30 words. If the answer is true, leave suggestion empty. The tasks are independent from each other. You will respond with a JSON object in the format of {"taskName": {"answer": true/false, "justification": "", "suggestion": ""}}. The task name can be identified from the double asterisks.
 
-  Given input below, find out if any of the followings are not met:
-  1. Location should not be too specific as to be personally identifiable.
-  2. Email address should not contain random numbers, and must sound professional.
-  3. Every experience should contain the location.
+  ### Task List ###
 
-  If an item is not met, insert into a JSON object. The JSON object should only contain a list of strings that contains your findings.
+  NOTE: If any information is just and empty string, consider invalid and empty.
 
-  IMPORTANT: You must respond *ONLY* with a JSON object and nothing else.
+  **Professional Email**
+  Determine the person's email address. After that, check whether the email satisfies the criteria for a professional email address. Criteria for a professional email are - no random numbers and must contain the person's name.
 
-    ### Input ###
-  {
-    "personalInfo":{
-        "name":"John Doe",
-        "occupation":"Full Stack Developer",
-        "experience":2,
-        "location":"Cyberjaya, Selangor",
-        "email":"john@gmail.com"
-    },
-    "education":[
-        {
-          "college":"Universiti Tenaga Nasional",
-          "location":"",
-          "graduationDate":"Dec 2021",
-          "degree":"Bachelor of Computer Science (Software Engineering)",
-          "gpa":3.00
-        },
-        {
-          "college":"Kolej Professional Mara Beranang",
-          "location":"",
-          "graduationDate":"Oct 2018",
-          "degree":"FHND in Computing (System Development)",
-          "gpa":3.00
-        }
-    ],
-    "relatedCourseworkProjects":[
-        {
-          "name":"Java Tutoring System for Malaysian Public Tertiary Schools",
-          "year":"Aug 2022 - Jan 2023",
-          "description":"Freelance project with XXX and BBB Berhad (funder) for an online Java tutoring system for students and teachers of secondary public schools in Malaysia."
-        },
-        {
-          "name":"AI-driven Call Analytics System",
-          "year":"Aug 2021 - Nov 2021",
-          "description":"Trained machine learning models and integrated them into a web prototype under the AI-driven Customer Call Analysis System, a XXX Seed Fund project."
-        },
-        {
-          "name":"Covid Hotspot Geolocation Alert (UNISAFE)",
-          "year":"",
-          "description":"Mobile Development"
-        },
-        {
-          "name":"NZ Labour Party Website",
-          "year":"",
-          "description":"Advanced Web Development"
-        }
-    ],
-    "skills":[
-        "OOP Programming",
-        "Web Development",
-        "PHP",
-        "MySQL",
-        "HTML",
-        "CSS",
-        "Javascript",
-        "React",
-        "Laravel",
-        "Python & Machine Learning",
-        "TensorFlow",
-        "sklearn",
-        "Flask",
-        "Mobile Development",
-        "Xamarin",
-        "Java",
-        "C#",
-        "Linux",
-        "Deployment (VPS and Containers)",
-        "CI/CD"
-    ],
-    "experience":[
-        {
-          "company":"AAA Digital Ltd",
-          "location":"",
-          "datesWorked":"May 2022 - present",
-          "title":"Full Stack Developer",
-          "responsibilities":[
-              "Developing and managing Sitecore and JSP websites for Singapore government agencies. Building and setting up DevOps workflow for the internal development team."
-          ]
-        },
-        {
-          "company":"BBB Axis",
-          "location":"",
-          "datesWorked":"Dec 2021 - Apr 2022",
-          "title":"Java Programmer",
-          "responsibilities":[
-              "Participated in the complete software development life cycle of a banking solution to a public bank in Brunei."
-          ]
-        },
-        {
-          "company":"CCC Berhad",
-          "location":"",
-          "datesWorked":"Aug 2021 - Nov 2021",
-          "title":"Software Tester Intern",
-          "responsibilities":[
-              "Conducted System Integration Testing (SIT), System Testing (ST), and User Acceptance Testing (UAT) on several systems developed by CCC and its vendors."
-          ]
-        },
-        {
-          "company":"EEE-IT Sdn Bhd",
-          "location":"",
-          "datesWorked":"Mar 2023 - present",
-          "title":"Mobile Developer",
-          "responsibilities":[
-              "Development of machine-learning integrated Flutter mobile application, aiming to help visually impaired person to detect text with support for 7 segment digit recognition."
-          ]
-        },
-        {
-          "company":"YCU R&D SDN BHD | FDA SDN BHD",
-          "location":"",
-          "datesWorked":"Aug 2021 - Nov 2021",
-          "title":"External Consultant & Developer",
-          "responsibilities":[
-              "Trained machine learning models and integrated them into a web prototype under the AI-driven Customer Call Analysis System, a FDA Seed Fund project."
-          ]
-        },
-        {
-          "company":"Yayasan Canselor UT",
-          "location":"",
-          "datesWorked":"Aug 2022 - Jan 2023",
-          "title":"Full Stack Developer",
-          "responsibilities":[
-              "Freelance project with XXX and FDA Berhad (funder) for an online JAVA tutoring system for students and teachers of secondary public schools in Malaysia."
-          ]
-        }
-    ],
-    "certifications":[
-        {
-          "name":"AWS Partner: Accreditation (Technical)",
-          "expiry":""
-        },
-        {
-          "name":"Microsoft Certified: Azure Developer Associate",
-          "expiry":""
-        },
-        {
-          "name":"Microsoft Certified: DevOps Engineer Expert",
-          "expiry":""
-        }
-    ]
-  }
-  ### End Input ###
+  **Location Privacy**
+  Determine the location provided under personal information. It should not provide house number or apartment building to keep privacy. Does the location keep privacy?
 
-  ### Output ###
-  {
-  "education": [
-  "Location information missing for Universiti Tenaga Nasional",
-  "Location information missing for Kolej Professional Mara Beranang"
-  ],
-  "relatedCourseworkProjects": [
-  "Year information missing for Covid Hotspot Geolocation Alert (UNISAFE)",
-  "Year information missing for NZ Labour Party Website"
-  ],
-  "experience": [
-  "Location information missing for AAA Digital Ltd",
-  "Location information missing for BBB Axis",
-  "Location information missing for CCC Berhad",
-  "Location information missing for EEE-IT Sdn Bhd",
-  "Location information missing for YCU R&D SDN BHD | FDA SDN BHD",
-  "Location information missing for Yayasan Canselor UT"
-  ]
-  }
-  ### End Output ###
+  **Graduation Date**
+  Extract education information of the person. Determine graduation date for all education.
+
+  **Job Responsibilities**
+  Focus on experience. Determine what are the responsibilities and job titile for each of the experiences. Can all responsibilities be determined for each experience, skills used are mentioned, and match the job title?
+
+  **Job Location**
+  Focus on experience. Determine where is the location and company name.
+
+  **Skills**
+  Determine the occupation of the person from their provided personal information, after that check through the skills section. Does all core skills related to the person occupation are listed?
+
+  **Project Contributions**
+  Focus on the experience section. Determine specific projects the person has contributed to in each job experience, outlining their role, contributions, and impact on the projects. Does the person has project contributions?
+
+  **Certification Expiry**
+  List out the person's certification if there's any. Does all of them provided with expiry date?
+
+  **References**
+  Check if the resume includes professional references. Provide details on the names and contact information of the references if available.
 
   ### Input ###
   ${content}
