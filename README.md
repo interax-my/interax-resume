@@ -1,6 +1,15 @@
 # Interax Resume
 
-This is a Next.js project that leverages the power of Cohere AI and LangChain to provide a comprehensive review of a resume. The application uses Cohere's AI to extracts key information from the resume and to analyze the content, providing valuable suggestions for improvement.
+Welcome to our Resume Revise application, a Next.js project that harnesses the capabilities of Cohere AI and LangChain to deliver a comprehensive review of resumes. This application aims to enhance the quality of resumes by leveraging advanced AI technologies for content analysis and improvement suggestions.
+
+## Features
+
+- **Cohere AI Integration:** The application seamlessly integrates Cohere's powerful AI to extract key information from resumes, ensuring a thorough understanding of the content.
+
+- **Resume Analysis:** Utilizing Cohere's AI capabilities, our application provides in-depth analysis of resumes, offering valuable insights and recommendations for improvement.
+
+- **Chatbot:** We've implemented a chatbot to assist you with any questions you may have about the application or resume-related queries. The chatbot is designed to provide information about the application's features, usage, and answer any inquiries you may have.
+
 
 ## Getting Started
 
