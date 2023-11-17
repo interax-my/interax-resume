@@ -31,7 +31,6 @@ function Chatbot() {
         axios.post('api/chat', { message: message, conversationId: conversationId })
         .then(response => {
             setMessages(prevMessages => [...prevMessages, { isUser: false, txt: response.data }]);
-            messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
         }).finally(() => {
             setIsLoading(false);
         });
