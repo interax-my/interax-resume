@@ -187,5 +187,9 @@ export const getChatDocuments = () => [
   {
     "title": "User-Friendly Interface",
     "snippet": "We prioritize a user-friendly experience to ensure easy navigation and interaction with the application."
+  },
+  {
+    "title": "Chatbot Information",
+    "snippet": "Our chatbot, integrated into InteraxResume, is designed to assist you with any questions related to the application, resume revision, or its features. Feel free to ask for guidance or information, and the chatbot will provide helpful responses."
   }
 ];
