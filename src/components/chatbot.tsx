@@ -59,7 +59,7 @@ function Chatbot() {
                 <div key={index} className="flex flex-col items-start gap-2">
                     <div className="grid grid-cols-8 gap-1">
                         { message.isUser ? <User className='mr-1 text-primary col-span-1'/> : <Bot className='mr-1 text-primary col-span-1'/>  }
-                        <span className='col-span-7'>{message.txt}</span>
+                        <span className='col-span-7 text-sm'>{message.txt}</span>
                     </div>
                     {index < messages.length - 1 && (
                         <Separator className="my-1 opacity-50" />
