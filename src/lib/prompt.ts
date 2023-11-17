@@ -161,3 +161,35 @@ export const generateImproveResumePrompt = (content: string) => {
   ### Output ###
   `;
 };
+
+//todo: more info about apps
+export const getChatDocuments = () => [
+  {
+    "title": "Application Name",
+    "snippet": "InteraxResume",
+  },
+  {
+    "title": "Application Overview",
+    "snippet": "Our web application is a resume revision system that leverages AI to enhance resumes."
+  },
+  {
+    "title": "Resume Data Extraction",
+    "snippet": "The application utilizes Cohere API for extracting relevant data from resumes."
+  },
+  {
+    "title": "AI Suggestions",
+    "snippet": "Cohere API is employed to provide intelligent suggestions on how to improve and optimize resumes."
+  },
+  {
+    "title": "Key Features",
+    "snippet": "Our application offers advanced features such as resume analysis, language enhancement, and personalized recommendations."
+  },
+  {
+    "title": "User-Friendly Interface",
+    "snippet": "We prioritize a user-friendly experience to ensure easy navigation and interaction with the application."
+  },
+  {
+    "title": "Chatbot Information",
+    "snippet": "Our chatbot, integrated into InteraxResume, is designed to assist you with any questions related to the application, resume revision, or its features. Feel free to ask for guidance or information, and the chatbot will provide helpful responses."
+  }
+];

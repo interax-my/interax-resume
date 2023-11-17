@@ -1,5 +1,6 @@
 'use client'
 
+import Chatbot from '@/components/chatbot';
 import Improvements from '@/components/sections/improvements'
 import ResumeInfo from '@/components/sections/resume-info'
 import { UploadResume } from '@/components/sections/upload-resume'
@@ -49,6 +50,7 @@ export default function Home() {
       <section className='w-full'>
         <Improvements suggestions={suggestions} accordionRef={improveAccordionRef} onChange={() => setImproveExpanded(!improveExpanded)} />
       </section>
+      <Chatbot />
     </main>
   )
 }

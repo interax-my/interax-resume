@@ -11,8 +11,6 @@ export default function Improvements({
   accordionRef: RefObject<HTMLButtonElement>,
   onChange?: () => void
 }) {
-  console.dir(suggestions);
-
   return (
     <SectionContainer title={"Suggested Improvements"} accordionRef={accordionRef} onChange={onChange}>
       {suggestions && Object.keys(suggestions).map((category, index) => (
