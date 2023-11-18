@@ -1,5 +1,5 @@
 import SectionContainer from "@/components/section-container"
-import { Suggestion } from "@/lib/models/suggestions";
+import { Suggestion, suggestionTitle } from "@/lib/models/suggestions";
 import { RefObject } from "react";
 
 export default function Improvements({
@@ -7,24 +7,43 @@ export default function Improvements({
   accordionRef,
   onChange
 }: {
-  suggestions: Suggestion,
+  suggestions: Suggestion | null,
   accordionRef: RefObject<HTMLButtonElement>,
   onChange?: () => void
 }) {
   return (
     <SectionContainer title={"Suggested Improvements"} accordionRef={accordionRef} onChange={onChange}>
-      {suggestions && Object.keys(suggestions).map((category, index) => (
-        <div key={index}>
-          <h3 className="font-semibold my-2 capitalize">{category}</h3>
-          <ul className="list-disc list-outside pl-4">
-            {!suggestions[category].answer ?
-              <li className="text-orange-500">{suggestions[category].suggestion}</li>
-              :
-              <li className="text-green-500">Nothing to improve.</li>
-            }
-          </ul>
-        </div>
-      ))}
+    { suggestions == null ? (
+      <h3 className="font-semibold my-2">N/A</h3>
+    ) : (
+      <div>
+        {Object.keys(suggestions).map((key) => {
+          const keyAsString = key as keyof Suggestion;
+          if (suggestions[keyAsString].length !== 0) {
+            return (
+              <div key={keyAsString}>
+               <h3 className="font-semibold my-2 text-primary">{suggestionTitle(keyAsString)}</h3>
+               <ul className="list-disc list-outside pl-4">
+                {suggestions[keyAsString].map((e, index) => (
+                  <li key={`${keyAsString}-${index}`} className="mb-2">{e}</li>
+                ))}
+               </ul>
+              </div>
+            );
+          } else {
+            return (
+              <div key={keyAsString}>
+               <h3 className="font-semibold my-2 text-primary">{suggestionTitle(keyAsString)}</h3>
+               <ul className="list-disc list-outside pl-4">
+                <li className="text-green-500">Nothing to improve.</li>
+               </ul>
+              </div>
+            );
+          }
+        })}
+      </div>
+    )
+    }
     </SectionContainer>
   )
 }

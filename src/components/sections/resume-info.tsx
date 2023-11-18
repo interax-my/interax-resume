@@ -227,7 +227,7 @@ export default function ResumeInfo({ resume, setResume, setSuggestions, accordio
         {getSkill()}
       </ul>
       <div className="flex justify-end">
-        <Button onClick={handleSuggestImprovements} disabled={loading || resume == null}>
+        <Button onClick={handleSuggestImprovements}>
           {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           Suggest Improvements
         </Button>

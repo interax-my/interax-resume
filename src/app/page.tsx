@@ -5,11 +5,12 @@ import Improvements from '@/components/sections/improvements'
 import ResumeInfo from '@/components/sections/resume-info'
 import { UploadResume } from '@/components/sections/upload-resume'
 import { Resume } from '@/lib/models/resume';
+import { Suggestion } from '@/lib/models/suggestions';
 import { useRef, useState } from 'react';
 
 export default function Home() {
   const [resumeInfo, setResumeInfo] = useState<Resume | null>(null);
-  const [suggestions, setSuggestions] = useState<any>(null);
+  const [suggestions, setSuggestions] = useState<Suggestion | null>(null);
   const [infoExpanded, setInfoExpanded] = useState(false);
   const infoAccordionRef = useRef<HTMLButtonElement>(null);
   const [improveExpanded, setImproveExpanded] = useState(false);
