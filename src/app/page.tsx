@@ -28,7 +28,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex flex-col items-center justify-between py-10 px-10 md:px-24 lg:px-40 container gap-y-8">
+    <main className="flex flex-col items-center justify-between pt-10 pb-14 px-10 md:px-24 lg:px-40 container gap-y-8">
       <section className='w-full'>
         <UploadResume onResumeInfoExtracted={(info) => {
           setResumeInfo(info);
