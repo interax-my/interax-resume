@@ -49,3 +49,8 @@ const parseAgain = (str: string) => {
     throw new Error('Error parsing JSON');
   }
  };
+
+export function removeNumericList(input: string): string {
+  const regex = /\d+\.\s/g;
+  return input.replace(regex, '');
+}

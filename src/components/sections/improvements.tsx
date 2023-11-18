@@ -1,5 +1,6 @@
 import SectionContainer from "@/components/section-container"
 import { Suggestion, suggestionTitle } from "@/lib/models/suggestions";
+import { removeNumericList } from "@/lib/utils";
 import { RefObject } from "react";
 
 export default function Improvements({
@@ -25,7 +26,7 @@ export default function Improvements({
                <h3 className="font-semibold mb-2 mt-4 text-primary">{suggestionTitle(keyAsString)}</h3>
                <ul className="list-disc list-outside pl-4">
                 {suggestions[keyAsString].map((e, index) => (
-                  <li key={`${keyAsString}-${index}`} className="mb-2">{e}</li>
+                  <li key={`${keyAsString}-${index}`} className="mb-2">{removeNumericList(e)}</li>
                 ))}
                </ul>
               </div>
