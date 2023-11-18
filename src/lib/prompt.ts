@@ -128,7 +128,7 @@ export const generateImproveResumePrompt = (content: string) => {
   ### Task List ###
 
   **Grammar Check**
-  Review the content for grammatical errors. Provide corrections and suggestions to ensure a polished, error-free document. Offer corrections or suggestions to enhance its structure. The content is in a JSON format, refrain from making corrections to the object key..
+  Review the content for grammatical errors. Provide corrections and suggestions to ensure a polished, error-free document. Offer corrections or suggestions to enhance its structure. The content is in a JSON format, only review the JSON values.
 
   **Content Optimization**
   Analyze the resume content to enhance its performance in Applicant Tracking Systems (ATS). Ensure that relevant keywords, skills, and experiences are appropriately emphasized to maximize the likelihood of successfully passing through applicant tracking systems. Provide specific suggestions or optimizations based on ATS best practices.
