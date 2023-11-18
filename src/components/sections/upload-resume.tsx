@@ -97,7 +97,7 @@ export function UploadResume({ onResumeInfoExtracted }: { onResumeInfoExtracted:
                         </Button>
                 </div>
                 { success && (
-                    <Label className="flex items-center font-semibold text-primary">
+                    <Label className="flex items-center font-semibold text-green-500">
                         <CheckCircle className="mr-2" />
                         <span>Resume has been extracted successfully.</span>
                     </Label>

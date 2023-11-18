@@ -7,11 +7,12 @@ import { EditExperience } from "./edit-experience";
 import { EditCertificate } from "./edit-certificate";
 import { EditSkill } from "./edit-skill";
 import { Button } from "../ui/button";
-import { Loader2 } from "lucide-react";
+import { CheckCircle, Loader2 } from "lucide-react";
 import axios from "axios";
 import { tryParseJson } from "@/lib/utils";
 import { Dispatch, RefObject, useState } from "react";
 import { toast } from "@/components/ui/use-toast";
+import { Label } from "@/components/ui/label";
 
 interface ResumeInfoProp {
   resume: Resume | null, 
@@ -23,8 +24,10 @@ interface ResumeInfoProp {
 
 export default function ResumeInfo({ resume, setResume, setSuggestions, accordionRef, onChange }: ResumeInfoProp) {
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleSuggestImprovements = () => {
+    setSuccess(false);
     setLoading(true);
     axios.post('api/process-resume', { resumeObj: resume })
       .then(data => {
@@ -32,6 +35,7 @@ export default function ResumeInfo({ resume, setResume, setSuggestions, accordio
           const parsedData = tryParseJson(data.data.data);
           setSuggestions(parsedData);
           setLoading(false);
+          setSuccess(true);
         } catch (_) {
             toast({
                 variant: "destructive",
@@ -228,6 +232,12 @@ export default function ResumeInfo({ resume, setResume, setSuggestions, accordio
           Suggest Improvements
         </Button>
       </div>
+      { success && (
+          <Label className="flex items-center font-semibold text-green-500">
+              <CheckCircle className="mr-2" />
+              <span>Suggestions have been generated successfully.</span>
+          </Label>
+      ) }
     </SectionContainer>
   )
 }
