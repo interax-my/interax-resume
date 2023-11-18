@@ -40,7 +40,10 @@ function Chatbot() {
             if (!reader) return;
             while (true) {
                 const { value, done } = await reader.read();
-                if (done) break;
+                if (done) {
+                    setIsLoading(false);
+                    break;
+                }
                 
                 const decodedChunk = decoder.decode(value, { stream: true });
                 setNewMessage(prev => prev + decodedChunk);
@@ -72,9 +75,9 @@ function Chatbot() {
             <div className="p-4 flex flex-col flex-grow mt-auto overflow-y-auto gap-2">
                 {messages.map((message, index) => (
                 <div key={index} className="flex flex-col items-start gap-2">
-                    <div className="grid grid-cols-8 gap-1">
+                    <div className="grid grid-cols-12 gap-1 w-full">
                         { message.isUser ? <User className='mr-1 text-primary col-span-1'/> : <Bot className='mr-1 text-primary col-span-1'/>  }
-                        <span className='col-span-7 text-sm'>{message.txt}</span>
+                        <span className='col-span-11 text-sm'>{message.txt}</span>
                     </div>
                     {index < messages.length - 1 && (
                         <Separator className="my-1 opacity-50" />
@@ -84,14 +87,14 @@ function Chatbot() {
                 { (isLoading || newMessage !== '') && (
                 <div className="flex flex-col items-start gap-2">
                     <Separator className="my-1 opacity-50" />
-                    <div className="grid grid-cols-8 gap-1">
+                    <div className="grid grid-cols-12 gap-1 w-full">
                         <Bot className='mr-1 text-primary col-span-1'/>
                         { newMessage === '' ? (
-                                 <div className='col-span-7 pt-2'>
+                                 <div className='col-span-11 pt-2'>
                                     <BouncingDotsLoader />
                                 </div>
                             ) : (
-                                <span className='col-span-7 text-sm'>{newMessage}</span>
+                                <span className='col-span-11 text-sm'>{newMessage}</span>
                             )}
                     </div>
                 </div>
