@@ -24,7 +24,6 @@ function Chatbot() {
         setIsLoading(true);
 
         setMessages(prevMessages => [...prevMessages, { isUser: true, txt: message }]);
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
 
         setConversationId(conversationId ?? Math.random().toString(36).substring(2, 15));
 
@@ -45,7 +44,7 @@ function Chatbot() {
     }, [messages]);
 
     return (
-    <Card className={`fixed bottom-0 right-0 p-4 rounded shadow flex flex-col space-between ${isMinimized ? 'w-60 h-12' : 'h-4/5 md:h-[72vh] md:w-96 w-full'}`}>
+    <Card className={`fixed bottom-0 right-0 p-4 rounded shadow flex flex-col space-between ${isMinimized ? 'w-60 h-12' : 'h-4/5 md:h-[72vh] md:w-2/5 w-full'}`}>
         <Button variant='ghost' asChild onClick={ toggleChat} className='p-0 cursor-pointer flex justify-between '>
             <div className="flex justify-between items-center">
                 <Label className='text-primary'>{ isMinimized && 'Ask us anything' }</Label>
