@@ -9,6 +9,6 @@ export const suggestionTitle = (str: string) => {
     case 'grammar_error': return "Grammartical Errors";
     case 'content_optimization': return "Content Improvements";
     case 'suitable_roles': return "Suitable Roles";
-    default: '';
+    default: return str;
   }
 }
