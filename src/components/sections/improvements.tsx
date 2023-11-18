@@ -22,7 +22,7 @@ export default function Improvements({
           if (suggestions[keyAsString].length !== 0) {
             return (
               <div key={keyAsString}>
-               <h3 className="font-semibold my-2 text-primary">{suggestionTitle(keyAsString)}</h3>
+               <h3 className="font-semibold mb-2 mt-4 text-primary">{suggestionTitle(keyAsString)}</h3>
                <ul className="list-disc list-outside pl-4">
                 {suggestions[keyAsString].map((e, index) => (
                   <li key={`${keyAsString}-${index}`} className="mb-2">{e}</li>
@@ -33,7 +33,7 @@ export default function Improvements({
           } else {
             return (
               <div key={keyAsString}>
-               <h3 className="font-semibold my-2 text-primary">{suggestionTitle(keyAsString)}</h3>
+               <h3 className="font-semibold mb-2 mt-4 text-primary">{suggestionTitle(keyAsString)}</h3>
                <ul className="list-disc list-outside pl-4">
                 <li className="text-green-500">Nothing to improve.</li>
                </ul>

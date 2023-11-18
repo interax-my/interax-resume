@@ -12,7 +12,7 @@ export const getAiBody = (prompt: string) => {
 };
 
 export const generateExtractPdfPrompt = (content: string) => {
-  return `Given a resume in text format below, please extract the following information and provide the results in a JSON object.
+  return `Given a resume in text format below, please extract the following information and provide the results in a JSON object. 
 
     ###resume content###
     ${content}
@@ -116,21 +116,23 @@ export const generateExtractPdfPrompt = (content: string) => {
       ]
     }
     
-    Respond only with a JSON object.`;
+    Note: Respond only with a JSON object and don't fix any spelling and grammatical error. Don't change any sentence, just extract.`;
 };
 
 export const generateImproveResumePrompt = (content: string) => {
   return `
   As a career consultant, you will evaluate the following tasks to enhance the resume. Respond with a JSON object {"grammar_error": [], "content_optimization": [], "suitable_roles": []}.
 
+  NOTE: If any information is just an empty, consider invalid and empty.
+
   ### Task List ###
 
   **Grammar Check**
-  Review the content for grammatical errors. Provide corrections and suggestions to ensure a polished, error-free document.
+  Review the content for grammatical errors. Provide corrections and suggestions to ensure a polished, error-free document. Offer corrections or suggestions to enhance its structure. The content is in a JSON format, refrain from making corrections to the object key..
 
   **Content Optimization**
-  Analyze the resume content for optimal ATS performance. Ensure relevant keywords, skills, and experiences are emphasized to increase the chances of passing through applicant tracking systems.
-
+  Analyze the resume content to enhance its performance in Applicant Tracking Systems (ATS). Ensure that relevant keywords, skills, and experiences are appropriately emphasized to maximize the likelihood of successfully passing through applicant tracking systems. Provide specific suggestions or optimizations based on ATS best practices.
+  
   **Suitable Roles**
   Identify potential roles based on the resume. Offer suggestions for roles that align with the individual's skills, experiences, and qualifications.
 
