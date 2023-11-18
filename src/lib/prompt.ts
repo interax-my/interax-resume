@@ -121,7 +121,7 @@ export const generateExtractPdfPrompt = (content: string) => {
 
 export const generateImproveResumePrompt = (content: string) => {
   return `
-  As a career consultant, you will evaluate the following tasks to enhance the resume. Respond with a JSON object {"grammar_error": [], "content_optimization": [], "suitable_roles": []}.
+  As a career consultant, you will evaluate the following tasks to enhance the resume. Respond with a JSON object {"grammar_error": [], "content_optimization": [], "suitable_roles": []}. Insert only strings in the JSON arrays and not an object. Strings should be in sentence format and not list format.
 
   NOTE: If any information is just an empty string or value, consider it as invalid.
 
