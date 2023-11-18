@@ -147,7 +147,6 @@ export const generateImproveResumePrompt = (content: string) => {
   `;
 };
 
-//todo: more info about apps
 export const getChatDocuments = () => [
   {
     "title": "Application Name",
@@ -159,7 +158,7 @@ export const getChatDocuments = () => [
   },
   {
     "title": "Resume Data Extraction",
-    "snippet": "The application utilizes Cohere API for extracting relevant data from resumes."
+    "snippet": "The application utilizes Cohere API for extracting relevant data from resumes. Please note that the system requires a readable PDF format for successful data extraction. Uploading images of resumes is not supported."
   },
   {
     "title": "AI Suggestions",
@@ -172,6 +171,14 @@ export const getChatDocuments = () => [
   {
     "title": "User-Friendly Interface",
     "snippet": "We prioritize a user-friendly experience to ensure easy navigation and interaction with the application."
+  },
+  {
+    "title": "Edit Resume Information",
+    "snippet": "If you find incorrect information in the resume details section, click the 'Edit' button to update and correct the information."
+  },
+  {
+    "title": "Missing Features",
+    "snippet": "If you notice the absence of a certain feature, rest assured that we are continuously working to enhance and expand our application. We appreciate your feedback, and updates with new features will be rolled out regularly."
   },
   {
     "title": "Chatbot Information",
