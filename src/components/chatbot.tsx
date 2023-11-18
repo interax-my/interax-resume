@@ -5,11 +5,11 @@ import { Card } from '@/components/ui/card';
 import { Bot, Forward, Maximize2, Minus, Send, User } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/seperator';
-import axios from 'axios';
 import BouncingDotsLoader from '@/components/bouncing-dots';
 
 function Chatbot() {
     const [messages, setMessages] = useState<{ isUser: boolean; txt: string; }[]>([]);
+    const [newMessage, setNewMessage] = useState('');
     const [input, setInput] = useState('');
     const [isMinimized, setIsMinimized] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
@@ -23,13 +23,28 @@ function Chatbot() {
         setInput('');
         setIsLoading(true);
 
-        setMessages(prevMessages => [...prevMessages, { isUser: true, txt: message }]);
+        if (newMessage !== '') {
+            setMessages(prevMessages => [...prevMessages, {isUser: false, txt: newMessage}, { isUser: true, txt: message }]);
+            setNewMessage('');
+        } else {
+            setMessages(prevMessages => [...prevMessages, { isUser: true, txt: message }]);
+        }
 
-        setConversationId(conversationId ?? Math.random().toString(36).substring(2, 15));
+        setConversationId(conversationId ?? Math.random().toString(36));
 
-        axios.post('api/chat', { message: message, conversationId: conversationId })
-        .then(response => {
-            setMessages(prevMessages => [...prevMessages, { isUser: false, txt: response.data }]);
+        fetch('api/chat', { method: 'post', body: JSON.stringify({ message: message, conversationId: conversationId }) })
+        .then(async response => {
+            const reader = response?.body?.getReader();
+            const decoder = new TextDecoder();
+
+            if (!reader) return;
+            while (true) {
+                const { value, done } = await reader.read();
+                if (done) break;
+                
+                const decodedChunk = decoder.decode(value, { stream: true });
+                setNewMessage(prev => prev + decodedChunk);
+            }
         }).finally(() => {
             setIsLoading(false);
         });
@@ -66,14 +81,18 @@ function Chatbot() {
                     )}
                 </div>
                 ))}
-                { isLoading && (
+                { (isLoading || newMessage !== '') && (
                 <div className="flex flex-col items-start gap-2">
                     <Separator className="my-1 opacity-50" />
                     <div className="grid grid-cols-8 gap-1">
                         <Bot className='mr-1 text-primary col-span-1'/>
-                        <div className='col-span-7 pt-2'>
-                            <BouncingDotsLoader />
-                        </div>
+                        { newMessage === '' ? (
+                                 <div className='col-span-7 pt-2'>
+                                    <BouncingDotsLoader />
+                                </div>
+                            ) : (
+                                <span className='col-span-7 text-sm'>{newMessage}</span>
+                            )}
                     </div>
                 </div>
                 )}
