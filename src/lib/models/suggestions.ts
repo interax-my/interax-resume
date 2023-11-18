@@ -1,15 +1,14 @@
-type SuggestionContent = {
-  answer: boolean;
-  justification: string;
-  suggestion: string;
-};
 export type Suggestion = {
-  [key: string]: SuggestionContent;
-  'Professional Email': SuggestionContent;
-  'Location Privacy': SuggestionContent;
-  'Graduation Date': SuggestionContent;
-  'Job Responsibilities': SuggestionContent;
-  'Job Location': SuggestionContent;
-  Skills: SuggestionContent;
-  'Certification Expiry': SuggestionContent;
+  grammar_error: [];
+  content_optimization: [];
+  suitable_roles: [];
 };
+
+export const suggestionTitle = (str: string) => {
+  switch (str.toLowerCase()) {
+    case 'grammar_error': return "Grammartical Errors";
+    case 'content_optimization': return "Content Improvements";
+    case 'suitable_roles': return "Suitable Roles";
+    default: '';
+  }
+}

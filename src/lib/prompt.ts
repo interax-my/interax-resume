@@ -12,7 +12,7 @@ export const getAiBody = (prompt: string) => {
 };
 
 export const generateExtractPdfPrompt = (content: string) => {
-  return `Given a resume in text format below, please extract the following information and provide the results in a JSON object.
+  return `Given a resume in text format below, please extract the following information and provide the results in a JSON object. 
 
     ###resume content###
     ${content}
@@ -116,48 +116,30 @@ export const generateExtractPdfPrompt = (content: string) => {
       ]
     }
     
-    Respond only with a JSON object.`;
+    Note: Respond only with a JSON object and don't fix any spelling and grammatical error. Don't change any sentence, just extract.`;
 };
 
 export const generateImproveResumePrompt = (content: string) => {
   return `
-  You are a career consultants, you will look at each task below and do as instructed. After that, determine whether the task result is true or false. If the task cannot be finished due to lack in information, answer will be false. If the answer is false, provide justification and suggestion with less than 30 words. If the answer is true, leave suggestion empty. The tasks are independent from each other. You will respond with a JSON object in the format of {"taskName": {"answer": true/false, "justification": "", "suggestion": ""}}. The task name can be identified from the double asterisks.
+  As a career consultant, you will evaluate the following tasks to enhance the resume. Respond with a JSON object {"grammar_error": [], "content_optimization": [], "suitable_roles": []}.
+
+  NOTE: If any information is just an empty, consider invalid and empty.
 
   ### Task List ###
 
-  NOTE: If any information is just and empty string, consider invalid and empty.
+  **Grammar Check**
+  Review the content for grammatical errors. Provide corrections and suggestions to ensure a polished, error-free document. Offer corrections or suggestions to enhance its structure. The content is in a JSON format, refrain from making corrections to the object key..
 
-  **Professional Email**
-  Determine the person's email address. After that, check whether the email satisfies the criteria for a professional email address. Criteria for a professional email are - no random numbers and must contain the person's name.
-
-  **Location Privacy**
-  Determine the location provided under personal information. It should not provide house number or apartment building to keep privacy. Does the location keep privacy?
-
-  **Graduation Date**
-  Extract education information of the person. Determine graduation date for all education.
-
-  **Job Responsibilities**
-  Focus on experience. Determine what are the responsibilities and job titile for each of the experiences. Can all responsibilities be determined for each experience, skills used are mentioned, and match the job title?
-
-  **Job Location**
-  Focus on experience. Determine where is the location and company name.
-
-  **Skills**
-  Determine the occupation of the person from their provided personal information, after that check through the skills section. Does all core skills related to the person occupation are listed?
-
-  **Project Contributions**
-  Focus on the experience section. Determine specific projects the person has contributed to in each job experience, outlining their role, contributions, and impact on the projects. Does the person has project contributions?
-
-  **Certification Expiry**
-  List out the person's certification if there's any. Does all of them provided with expiry date?
-
-  **References**
-  Check if the resume includes professional references. Provide details on the names and contact information of the references if available.
+  **Content Optimization**
+  Analyze the resume content to enhance its performance in Applicant Tracking Systems (ATS). Ensure that relevant keywords, skills, and experiences are appropriately emphasized to maximize the likelihood of successfully passing through applicant tracking systems. Provide specific suggestions or optimizations based on ATS best practices.
+  
+  **Suitable Roles**
+  Identify potential roles based on the resume. Offer suggestions for roles that align with the individual's skills, experiences, and qualifications.
 
   ### Input ###
   ${content}
   ### End Input ###
-
+  
   ### Output ###
   `;
 };

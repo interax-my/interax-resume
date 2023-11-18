@@ -28,24 +28,33 @@ export const tryParseJson = (str: string) => {
 
 const parseAgain = (str: string) => {
   try {
-    const regex = /\,(?!\s*?[\{\[\"\'\w])/g;
-
     const index = str.indexOf("{");
     const lastIndex = str.lastIndexOf("}");
+    const regex = /\,(?!\s*?[\{\[\"\'\w])/g;
 
     let txt = str.substring(index, lastIndex + 1);
+    txt = txt.replace(/\n/g, '');
+    txt = txt.replace(/\\/g, '');
     txt = txt.replace(/\\n/g, "\\n")
-              .replace(/\\'/g, "\\'")
-              .replace(/\\"/g, '\\"')
-              .replace(/\\&/g, "\\&")
-              .replace(/\\r/g, "\\r")
-              .replace(/\\t/g, "\\t")
-              .replace(/\\b/g, "\\b")
-              .replace(/\\f/g, "\\f");
-
-    txt.replace(regex, '')
+        .replace(/\\'/g, "\\'")
+        .replace(/\\"/g, '\\"')
+        .replace(/\\&/g, "\\&")
+        .replace(/\\r/g, "\\r")
+        .replace(/\\t/g, "\\t")
+        .replace(/\\b/g, "\\b")
+        .replace(/\\f/g, "\\f");
+    txt.replace(regex, '');
     return JSON.parse(txt);
   } catch (_) {
-    throw('Error parsing JSON')
+    throw new Error('Error parsing JSON');
+  }
+ };
+
+export function removeNumericList(input: string): string {
+  try {
+    const regex = /\d+\.\s/g;
+    return input.replace(regex, '');
+  } catch (_) {
+    return input;
   }
 }
