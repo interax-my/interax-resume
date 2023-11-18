@@ -45,11 +45,13 @@ function Chatbot() {
     }, [messages]);
 
     return (
-    <Card className={`fixed bottom-0 right-0 p-4 rounded shadow flex flex-col space-between h-12 ${isMinimized ? 'w-60' : 'h-4/5 md:h-[72vh] md:w-96'}`}>
-        <div className="flex justify-between items-center">
-            <Label className='text-primary'>{ isMinimized && 'Ask us anything' }</Label>
-            <button onClick={ toggleChat} >{ isMinimized ? <Maximize2 className='text-primary h-4 w-4' /> : <Minus className='text-primary h-4 w-4' /> }</button>
-        </div>
+    <Card className={`fixed bottom-0 right-0 p-4 rounded shadow flex flex-col space-between ${isMinimized ? 'w-60 h-12' : 'h-4/5 md:h-[72vh] md:w-96 w-full'}`}>
+        <Button variant='ghost' asChild onClick={ toggleChat} className='p-0 cursor-pointer flex justify-between '>
+            <div className="flex justify-between items-center">
+                <Label className='text-primary'>{ isMinimized && 'Ask us anything' }</Label>
+                { isMinimized ? <Maximize2 className='text-primary h-4 w-4' /> : <Minus className='text-primary h-4 w-4' /> }
+            </div>
+        </Button>
         {!isMinimized && (
         <>
             <Separator className='mt-2' />
