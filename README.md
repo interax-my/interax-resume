@@ -11,7 +11,7 @@ Welcome to our Resume Revise application, a Next.js project that harnesses the c
 - **Chatbot:** We've implemented a chatbot to assist you with any questions you may have about the application or resume-related queries. The chatbot is designed to provide information about the application's features, usage, and answer any inquiries you may have.
 
 ## Resume Sample
-Can download this [Sample](https://github.com/interax-my/interax-resume/blob/main/public/sample-resume-1.pdf) resume if you have no resume to try.
+Can download this [Sample](https://github.com/interax-my/interax-resume/blob/main/public/resume-sample-1.pdf) resume if you have no resume to try.
 
 ## Getting Started
 
