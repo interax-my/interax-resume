@@ -51,6 +51,10 @@ const parseAgain = (str: string) => {
  };
 
 export function removeNumericList(input: string): string {
-  const regex = /\d+\.\s/g;
-  return input.replace(regex, '');
+  try {
+    const regex = /\d+\.\s/g;
+    return input.replace(regex, '');
+  } catch (_) {
+    return input;
+  }
 }
