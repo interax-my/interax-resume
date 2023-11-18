@@ -27,6 +27,7 @@ export function UploadResume({ onResumeInfoExtracted }: { onResumeInfoExtracted:
     };
 
     const onProcess = async () => {
+        setSuccess(false);
         setProcessing(true);
         const base64String = await fileToBase64(resumeFile!);
 
