@@ -121,29 +121,33 @@ export const generateExtractPdfPrompt = (content: string) => {
 
 export const generateImproveResumePrompt = (content: string) => {
   return `
-  As a career consultant, you will evaluate the following tasks to enhance the resume. Respond with a JSON object {"grammar_error": [], "content_optimization": [], "suitable_roles": []}. Insert only strings in the JSON arrays and not an object. Strings should be in sentence format and not list format. All strings should be self-contained and does not need external context. All strings should be in human-readable format.
-
-  NOTE: If any information is just an empty string or value, consider it as invalid.
+  As a career consultant, you will evaluate the following tasks to enhance the resume. Respond with a JSON object {"grammar_error": [], "content_optimization": [], "suitable_roles": []}. Insert only strings in the JSON arrays and not an object. Strings should be in sentence format and not list format. All strings should be self-contained and do not need external context. All strings should be in human-readable format.
 
   ### Task List ###
 
   **Grammar Error**
   Review the content for grammatical errors. Provide corrections and suggestions to ensure a polished, error-free document. Offer corrections or suggestions to enhance its structure. The content is in a JSON format, only review the JSON values.
+  For example:
+  - In the section describing your work at ITC Catterick, there are several grammar and syntax errors. Here is a corrected version of that section: At ITC Catterick, I served as a Platoon Sergeant for a 44-week course. 
 
   **Content Optimization**
   Analyze the resume content to enhance its performance in Applicant Tracking Systems (ATS). Ensure that relevant keywords, skills, and experiences are appropriately emphasized to maximize the likelihood of successfully passing through applicant tracking systems. The resume content should effectively reflect the person's target job position. Provide specific suggestions or optimizations based on ATS best practices. 
   NOTES:
-  1. Suggestions with 'bullet points', 'format', and 'JSON' keywords are to be removed.
+  1. Avoid using 'bullet points', 'format', or 'JSON' keywords.
   2. Suggestions should be directly applicable to the resume.
-  
+  For example:
+  - Replace generic terms like "various tasks" with specific achievements or responsibilities.
+  - Ensure each job entry includes relevant keywords from the job description.
+  - Quantify achievements where possible (e.g., "Led a team of X members" instead of "Managed a team").
+
   **Suitable Roles**
-  Identify potential roles based on the resume. Offer suggestions for roles that align with the individual's skills, experiences, and qualifications. For each suggestion, describe your thought process using format "roles: suggestion".
+  Identify potential roles based on the resume. Offer suggestions for roles that align with the individual's skills, experiences, and qualifications. For each suggestion, describe your thought process using the format "roles: suggestion".
+  For example:
+  - Project Manager: This suggestion is based on the candidate's experience in leading teams and managing projects at XYZ Company. The skills gained align well with the responsibilities of a Project Manager.
 
   ### Input ###
   ${content}
   ### End Input ###
-  
-  ### Output ###
   `;
 };
 
