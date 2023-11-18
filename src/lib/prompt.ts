@@ -4,7 +4,7 @@ export const getAiBody = (prompt: string) => {
     prompt: prompt,
     model: 'command',
     max_tokens: 2000,
-    temperature: 0.3,
+    temperature: 0.2,
     stream: false,
     prompt_truncation: 'off',
     citation_quality: 'fast',
@@ -123,7 +123,7 @@ export const generateImproveResumePrompt = (content: string) => {
   return `
   As a career consultant, you will evaluate the following tasks to enhance the resume. Respond with a JSON object {"grammar_error": [], "content_optimization": [], "suitable_roles": []}.
 
-  NOTE: If any information is just an empty, consider invalid and empty.
+  NOTE: If any information is just an empty string or value, consider it as invalid.
 
   ### Task List ###
 
