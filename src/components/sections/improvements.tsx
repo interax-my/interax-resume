@@ -13,7 +13,7 @@ export default function Improvements({
   onChange?: () => void
 }) {
   return (
-    <SectionContainer title={"Suggested Improvements"} accordionRef={accordionRef} onChange={onChange}>
+    <SectionContainer title={"Suggested Improvements"} description={"Get Tailored Recommendations to Enhance Your Resume's Impact"} accordionRef={accordionRef} onChange={onChange}>
     { suggestions == null ? (
       <h3 className="font-semibold my-2">N/A</h3>
     ) : (
